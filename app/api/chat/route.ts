@@ -87,6 +87,7 @@ function buildResponseContract(
           "Agar savol follow-up bo'lsa, oldingi kontekstni davom ettiring va mavzuni o'zgartirib yubormang.",
           "Foydalanuvchi ro'yxat so'ramasa, ro'yxat ishlatmang.",
           "Umumiy motivatsion gaplardan qoching.",
+          "Savolga aloqasiz umumiy xulosa yoki balandparvoz yakun yozmang.",
           "Customer support uslubida yozmang. 'Agar xohlasangiz yana aytaman' kabi sun'iy yakunlardan qoching.",
           "Foydalanuvchi so'ramasa, saytga kirishni yoki qo'shimcha ma'lumot olishni tavsiya qilmang.",
           "Agar fikr yoki yondashuv public manbada aniq ko'rinib turgan bo'lsa, 'mening fikrimcha' deb yumshatmang, bevosita ayting.",
@@ -99,6 +100,7 @@ function buildResponseContract(
           'If the question is a follow-up, continue the prior context instead of resetting the topic.',
           'Do not use a list unless the user explicitly asks for one.',
           'Avoid generic motivational filler.',
+          'Do not end with a vague mission statement or generic reflection unless the user explicitly asked for it.',
           "Do not sound like customer support. Avoid generic closers such as 'let me know if you want more details'.",
           "Do not tell the user to visit a website unless they explicitly asked for logistics or source links.",
           "If the viewpoint is clearly grounded in the selected public sources, say it directly instead of softening it with 'in my opinion'.",
@@ -121,6 +123,10 @@ function buildResponseContract(
     locale === 'uz'
       ? retrieval.responseMode === 'entity'
         ? "Entity savollarida: bu nima, qanday ishlaydi, nimasi bilan farq qiladi degan tartibda javob bering."
+        : retrieval.responseMode === 'theme_summary'
+          ? "Theme-summary savollarida: 3-6 ta eng ko'p qaytadigan mavzuni bevosita ayting, keyin bitta qisqa amaliy izoh qo'shing. Keraksiz umumlashtirmang."
+          : retrieval.responseMode === 'ecosystem'
+            ? "Ecosystem savollarida: menga eng aniq bog'langan loyihalarni avval ayting, keyin kerak bo'lsa rasmiyligi pastroq bog'lanishlarni alohida ehtiyotkorlik bilan ajrating."
         : retrieval.responseMode === 'latest'
           ? "Latest savollarida: to'g'ridan-to'g'ri eng so'nggi public signalni ayting va kerak bo'lsa sanani qo'shing."
           : retrieval.responseMode === 'founder_story'
@@ -130,6 +136,10 @@ function buildResponseContract(
               : "Maslahat savollarida: prinsipni ayting, keyin bitta amaliy qadam bering."
       : retrieval.responseMode === 'entity'
         ? 'For entity questions: answer in the order of what it is, how it works, and what makes it different.'
+        : retrieval.responseMode === 'theme_summary'
+          ? 'For theme-summary questions: name the 3-6 strongest recurring themes directly, then add one short practical explanation. Do not drift into generic reflection.'
+          : retrieval.responseMode === 'ecosystem'
+            ? 'For ecosystem questions: list the projects most clearly tied to me first, then separate thinner or more secondary public associations carefully.'
         : retrieval.responseMode === 'latest'
           ? 'For latest questions: give the latest public signal directly and include the date when useful.'
           : retrieval.responseMode === 'founder_story'
@@ -202,7 +212,7 @@ export async function POST(request: NextRequest) {
 
     const completion = await client.chat.completions.create({
       model: chatModel,
-      temperature: 0.35,
+      temperature: 0.25,
       max_tokens: replyMaxTokens,
       messages: [
         {

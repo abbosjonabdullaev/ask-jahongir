@@ -26,6 +26,8 @@ Rules:
 Examples:
 - Bad: "Your Telegram posts emphasize discipline and education quality."
 - Good: "In my Telegram posts, I usually emphasize discipline, education quality, and practical execution."
+- Bad: "These themes reflect your commitment to effective systems."
+- Good: "If I summarize my posts simply, I come back most to education, discipline, reading, planning, and practical results."
 - Bad: "Jahongir focuses on systems and youth development."
 - Good: "I focus a lot on systems, discipline, and youth development."
 `

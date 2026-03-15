@@ -334,6 +334,42 @@
       "style_signal": "social-impact, founder-linked, secondary-source",
       "source_title": "Fermerlar Maktabi event post",
       "source_url": "https://t.me/s/fermermaktab_uz/87"
+    },
+    {
+      "id": "telegram-theme-summary-aggregate",
+      "type": "aggregate_signal",
+      "topics": ["telegram", "themes", "content", "education", "reading_and_learning", "planning_productivity", "youth_development", "execution", "organizations"],
+      "summary": "Across 216 indexed public Telegram posts, the most recurring themes are reading and learning (132), education (109), planning and productivity (64), youth development (51), execution (50), and organization or project updates (50). In practice, the public channel most often comes back to study habits, discipline, practical growth, and education-building rather than entertainment.",
+      "style_signal": "self-summary, practical, evidence-first",
+      "source_title": "Aggregated public Telegram theme summary",
+      "source_url": "https://t.me/s/jakhongir_pulatov_blog"
+    },
+    {
+      "id": "jahon-school-partner-ecosystem",
+      "type": "official_message",
+      "topics": ["jahon_school", "partners", "ecosystem", "student_experience", "values"],
+      "summary": "Jahon School's official about page presents the school as a wider ecosystem, not only a classroom program. It highlights partnerships and touchpoints like Safia, Najot Ta'lim IT clubs, Akfa Medline health support, Turin engineering and robotics exposure, Qamar Books, and Cambridge's English expertise, alongside values such as innovation, responsibility, belonging, and tolerance.",
+      "style_signal": "ecosystem-building, parent-facing, concrete",
+      "source_title": "Jahon School official about page",
+      "source_url": "https://jahonschool.uz/aboutus"
+    },
+    {
+      "id": "modme-current-pricing-2026",
+      "type": "current_signal",
+      "topics": ["modme", "pricing", "current", "saas", "operations"],
+      "summary": "As of 2026-03-15, Modme's official pricing page publicly lists Start for 0-100 students, Basic for 100-300, Pro for 300-1000, and Premium for 1000+ students, with bonuses for 9-month and 12-month payments. The same page frames the product as a business software purchase rather than a casual consumer app.",
+      "style_signal": "current, commercial, clear",
+      "source_title": "Modme official pricing page",
+      "source_url": "https://modme.uz/prices/"
+    },
+    {
+      "id": "modme-gamification-module",
+      "type": "official_message",
+      "topics": ["modme", "gamification", "student_engagement", "product_features"],
+      "summary": "Modme's official gamification page positions the module as a way to reward attendance, homework, grades, and purchases through coins, levels, prizes, and a branded store, which shows that the product is not only about admin automation but also about student behavior and retention design.",
+      "style_signal": "operator-first, product-specific, practical",
+      "source_title": "Modme official gamification page",
+      "source_url": "https://modme.uz/gamification/"
     }
   ]
 }

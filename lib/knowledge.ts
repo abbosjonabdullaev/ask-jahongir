@@ -189,6 +189,8 @@ export type SourceLink = {
 
 export type ResponseMode =
   | 'entity'
+  | 'theme_summary'
+  | 'ecosystem'
   | 'advice'
   | 'latest'
   | 'founder_story'
@@ -335,6 +337,14 @@ function isFollowUpQuery(text: string) {
 }
 
 function inferResponseMode(query: string, matchedEntitiesCount: number): ResponseMode {
+  if (/(what themes|which themes|telegram posts|telegram content|what do you post about|content themes|mavzu|mavzular|nimalar ko'p uchraydi|nimani ko'p yozasiz|postlarimda)/i.test(query)) {
+    return 'theme_summary'
+  }
+
+  if (/(what businesses|what projects|your businesses|your projects|business ecosystem|project ecosystem|qanday loyihalar|qaysi loyihalar|qanday bizneslar|qaysi bizneslar|nima ishlar qilasiz|nima bizneslaringiz bor|ekotizim|ecosystem)/i.test(query)) {
+    return 'ecosystem'
+  }
+
   if (/(current|currently|latest|recent|now|hozir|ayni payt|eng so'nggi|oxirgi)/i.test(query)) {
     return 'latest'
   }
@@ -482,6 +492,13 @@ function scoreSnippet(query: string, snippet: PublicSnippet) {
   }
 
   if (
+    snippet.type === 'aggregate_signal' &&
+    /(what themes|which themes|telegram posts|telegram content|what do you post about|content themes|mavzu|mavzular|nimalar ko'p uchraydi|nimani ko'p yozasiz|postlarimda)/i.test(query)
+  ) {
+    score += 8
+  }
+
+  if (
     snippet.type === 'public_interview_signal' &&
     /(interview|podcast|episode|suhbat|webinar|books|reading|mistakes|crisis|systems|leadership|founder)/i.test(query)
   ) {
@@ -493,6 +510,18 @@ function scoreSnippet(query: string, snippet: PublicSnippet) {
     /(current|currently|latest|recent|now|hozir|ayni payt|oxirgi|eng so'nggi)/i.test(query)
   ) {
     score += 6
+  }
+
+  if (/(price|pricing|cost|tariff|narx|narxlar|qancha turadi|tarif)/i.test(query) && /pricing|current|saas/.test(snippet.topics.join(' '))) {
+    score += 6
+  }
+
+  if (/(partner|partners|ecosystem|what makes.*different|nima bilan farq qiladi|qanday ajraladi|hamkor|hamkorlar|qadriyat|values)/i.test(query) && /partners|ecosystem|values/.test(snippet.topics.join(' '))) {
+    score += 5
+  }
+
+  if (/(what businesses|what projects|your businesses|your projects|business ecosystem|project ecosystem|qanday loyihalar|qaysi loyihalar|qanday bizneslar|qaysi bizneslar|nima bizneslaringiz bor|ekotizim)/i.test(query) && /ecosystem|brand_ecosystem/.test(snippet.topics.join(' '))) {
+    score += 5
   }
 
   if (/(book|books|reading|kitob|o'qish)/i.test(query) && /books|reading|self_development/.test(snippet.topics.join(' '))) {
@@ -611,6 +640,14 @@ function scoreVoiceSetItem(query: string, item: VoiceSetItem) {
 
   if (/(how do you think|your view|your approach|what would you say|maslahat|fikr|qanday qaraysiz|qanday maslahat)/i.test(query)) {
     score += 3
+  }
+
+  if (/(what themes|which themes|telegram posts|telegram content|what do you post about|content themes|mavzu|mavzular|nimalar ko'p uchraydi|nimani ko'p yozasiz|postlarimda)/i.test(query) && /telegram|themes|content/.test(item.topics.join(' '))) {
+    score += 8
+  }
+
+  if (/(what businesses|what projects|your businesses|your projects|business ecosystem|project ecosystem|qanday loyihalar|qaysi loyihalar|qanday bizneslar|qaysi bizneslar|nima bizneslaringiz bor|ekotizim)/i.test(query) && /businesses|projects|ecosystem/.test(item.topics.join(' '))) {
+    score += 8
   }
 
   if (/(jahon school|jahon|maktab|school|parent|ota-ona|skilldev)/i.test(query) && /jahon_school|parents|life_skills/.test(item.topics.join(' '))) {

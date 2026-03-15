@@ -6,6 +6,7 @@ import type { AnswerReview, ReviewRating } from '@/lib/reviewStore'
 
 type ReviewsResponse = {
   items?: AnswerReview[]
+  canEdit?: boolean
   error?: string
 }
 
@@ -15,6 +16,7 @@ export default function ReviewsAdminPage() {
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<ReviewRating | 'all'>('all')
   const [savingId, setSavingId] = useState<string | null>(null)
+  const [canEdit, setCanEdit] = useState(false)
 
   useEffect(() => {
     void loadReviews()
@@ -90,6 +92,7 @@ export default function ReviewsAdminPage() {
       }
 
       setItems(data.items ?? [])
+      setCanEdit(Boolean(data.canEdit))
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : 'Could not load reviews.')
     } finally {
@@ -177,6 +180,11 @@ export default function ReviewsAdminPage() {
 
         {isLoading && <p style={{ color: 'var(--muted)' }}>Loading reviews...</p>}
         {error && <p style={{ color: '#dc2626' }}>{error}</p>}
+        {!canEdit && !isLoading && (
+          <p style={{ color: 'var(--muted)' }}>
+            This environment is read-only for reviews. You can inspect the bundled snapshot here, but edits only persist locally.
+          </p>
+        )}
 
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {[
@@ -290,7 +298,7 @@ export default function ReviewsAdminPage() {
                     <button
                       key={rating}
                       type="button"
-                      disabled={savingId === item.id}
+                      disabled={savingId === item.id || !canEdit}
                       onClick={() => void updateItem(item.id, { rating })}
                       className="rounded-full px-3 py-1.5 text-xs font-medium disabled:opacity-50"
                       style={{
@@ -340,6 +348,7 @@ export default function ReviewsAdminPage() {
                     <textarea
                       defaultValue={item.notes}
                       rows={4}
+                      disabled={!canEdit}
                       className="mt-3 w-full rounded-xl px-3 py-2.5 text-sm outline-none"
                       style={{ background: 'var(--ai-bubble)', border: '1px solid var(--border)' }}
                       onBlur={(event) => {

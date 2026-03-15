@@ -31,7 +31,7 @@ const reviewFilePath = path.join(
   'data',
   'jahongir-answer-reviews.json'
 )
-const canPersistReviews =
+export const canEditReviews =
   !process.env.NETLIFY && !process.env.AWS_LAMBDA_FUNCTION_NAME && !process.env.VERCEL
 
 async function readReviewFile(): Promise<ReviewFile> {
@@ -44,12 +44,16 @@ async function writeReviewFile(data: ReviewFile) {
 }
 
 export async function listReviews() {
-  if (!canPersistReviews) {
-    return []
-  }
+  try {
+    const data = await readReviewFile()
+    return data.items.sort((left, right) => right.createdAt.localeCompare(left.createdAt))
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+      return []
+    }
 
-  const data = await readReviewFile()
-  return data.items.sort((left, right) => right.createdAt.localeCompare(left.createdAt))
+    throw error
+  }
 }
 
 export async function appendReview(input: Omit<AnswerReview, 'id' | 'createdAt' | 'rating' | 'notes'>) {
@@ -61,7 +65,7 @@ export async function appendReview(input: Omit<AnswerReview, 'id' | 'createdAt' 
     ...input,
   }
 
-  if (!canPersistReviews) {
+  if (!canEditReviews) {
     return item
   }
 
@@ -77,7 +81,7 @@ export async function updateReview(
   id: string,
   patch: Partial<Pick<AnswerReview, 'rating' | 'notes'>>
 ) {
-  if (!canPersistReviews) {
+  if (!canEditReviews) {
     return null
   }
 

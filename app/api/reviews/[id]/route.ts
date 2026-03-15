@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { updateReview } from '@/lib/reviewStore'
+import { canEditReviews, updateReview } from '@/lib/reviewStore'
 
 export const dynamic = 'force-dynamic'
 
@@ -9,6 +9,10 @@ type Params = {
 
 export async function PATCH(request: NextRequest, context: Params) {
   try {
+    if (!canEditReviews) {
+      return NextResponse.json({ error: 'Review editing is disabled in this environment.' }, { status: 403 })
+    }
+
     const { id } = await context.params
     const body = (await request.json()) as {
       rating?: 'unreviewed' | 'good' | 'bad'

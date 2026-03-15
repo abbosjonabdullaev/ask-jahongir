@@ -84,7 +84,7 @@ function trimGenericClosing(
   const genericThemeClosing =
     locale === 'uz'
       ? /^(Umuman|Bu mavzular|Maqsadim|Asosiy maqsadim)/i
-      : /^(Overall|These themes|This reflects|My aim is|The overall idea)/i
+      : /^(Overall|These themes|This reflects|My aim is|My goal is|The overall idea)/i
 
   if (!genericThemeClosing.test(lastPart)) {
     return reply

@@ -10,6 +10,7 @@ type Message = {
   content: string
   sources?: SourceLink[]
   followUps?: string[]
+  feedback?: 'helpful' | 'not-accurate' | 'too-generic'
 }
 
 type Props = {
@@ -17,6 +18,7 @@ type Props = {
   lang: Language
   onSpeak?: (text: string) => void
   onFollowUp?: (question: string) => void
+  onFeedback?: (value: 'helpful' | 'not-accurate' | 'too-generic') => void
 }
 
 function timeAgo(date: Date) {
@@ -47,7 +49,7 @@ function sourceKindLabel(source: SourceLink, lang: Language) {
   }
 }
 
-export function MessageBubble({ message, lang, onSpeak, onFollowUp }: Props) {
+export function MessageBubble({ message, lang, onSpeak, onFollowUp, onFeedback }: Props) {
   const isUser = message.role === 'user'
   const [copied, setCopied] = useState(false)
   const [sourcesOpen, setSourcesOpen] = useState(false)
@@ -55,6 +57,7 @@ export function MessageBubble({ message, lang, onSpeak, onFollowUp }: Props) {
   const [createdAt] = useState(() => Date.now())
   const [, tick] = useState(0)
   const t = UI_TEXT[lang]
+  const sourceLabels = Array.from(new Set((message.sources ?? []).map((source) => sourceKindLabel(source, lang)))).slice(0, 3)
 
   useEffect(() => {
     const timer = setInterval(() => tick((value) => value + 1), 60_000)
@@ -92,6 +95,19 @@ export function MessageBubble({ message, lang, onSpeak, onFollowUp }: Props) {
           }
         >
           <p className="whitespace-pre-wrap">{message.content}</p>
+          {!isUser && sourceLabels.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {sourceLabels.map((label) => (
+                <span
+                  key={label}
+                  className="rounded-full px-2.5 py-1 text-[10px] font-medium"
+                  style={{ background: 'var(--surface-soft)', color: 'var(--muted)' }}
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
+          )}
           {!isUser && (
             <div className="mt-3 flex flex-wrap items-center gap-2.5">
               {onSpeak && (
@@ -122,6 +138,32 @@ export function MessageBubble({ message, lang, onSpeak, onFollowUp }: Props) {
                   {t.askFollowUp}
                 </button>
               )}
+            </div>
+          )}
+          {!isUser && onFeedback && (
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              {([
+                ['helpful', t.helpful],
+                ['not-accurate', t.notAccurate],
+                ['too-generic', t.tooGeneric],
+              ] as const).map(([value, label]) => {
+                const isActive = message.feedback === value
+                return (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => onFeedback(value)}
+                    className="min-h-[36px] rounded-full border px-3 py-1.5 text-[11px] font-medium transition-colors"
+                    style={{
+                      borderColor: isActive ? 'var(--user-bubble)' : 'var(--border)',
+                      background: isActive ? 'var(--surface-soft)' : 'transparent',
+                      color: isActive ? 'var(--foreground)' : 'var(--muted)',
+                    }}
+                  >
+                    {label}
+                  </button>
+                )
+              })}
             </div>
           )}
           {!isUser && message.followUps && message.followUps.length > 0 && onFollowUp && (

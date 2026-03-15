@@ -307,7 +307,7 @@ export async function POST(request: NextRequest) {
 
     const question = messages.filter((message) => message.role === 'user').at(-1)?.content ?? ''
 
-    await appendReview({
+    const review = await appendReview({
       locale,
       question,
       reply: normalizedReply,
@@ -322,6 +322,7 @@ export async function POST(request: NextRequest) {
       matchedEntities: retrieval.matchedEntities,
       sources: retrieval.sources,
       provider: chatProvider,
+      reviewId: review.id,
     })
   } catch (error) {
     const message =
@@ -339,7 +340,7 @@ export async function POST(request: NextRequest) {
       const question = messages.filter((message) => message.role === 'user').at(-1)?.content ?? ''
       const fallbackReply = buildFallbackReply(locale, retrieval)
 
-      await appendReview({
+      const review = await appendReview({
         locale,
         question,
         reply: fallbackReply,
@@ -355,6 +356,7 @@ export async function POST(request: NextRequest) {
         sources: retrieval.sources,
         fallback: true,
         provider: 'fallback',
+        reviewId: review.id,
       })
     }
 

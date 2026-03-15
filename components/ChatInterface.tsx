@@ -13,9 +13,24 @@ type Message = {
   content: string
   sources?: SourceLink[]
   followUps?: string[]
+  reviewId?: string
+  feedback?: 'helpful' | 'not-accurate' | 'too-generic'
 }
 
 type ResponseMode = 'text' | 'voice'
+type FeedbackValue = NonNullable<Message['feedback']>
+
+type CachedReply = {
+  reply: string
+  sources: SourceLink[]
+  matchedEntities: string[]
+  reviewId?: string
+  createdAt: number
+}
+
+const answerCacheStorageKey = 'ask-jahongir-answer-cache-v1'
+const feedbackStorageKey = 'ask-jahongir-feedback-v1'
+const cacheTtlMs = 1000 * 60 * 60 * 12
 
 function getPreferredRecordingMimeType() {
   if (typeof MediaRecorder === 'undefined') return ''
@@ -113,6 +128,112 @@ function buildFollowUps(lang: Language, question: string, reply: string, matched
   return lang === 'uz'
     ? ["Shu mavzuni chuqurroq ochib bering", "Bunga amaliy misol bering", "Bu bo'yicha keyingi qadam nima?"]
     : ['Go deeper on this', 'Give a practical example', 'What is the next step here?']
+}
+
+function buildCacheKey(lang: Language, messages: Message[]) {
+  return JSON.stringify({
+    lang,
+    messages: messages.slice(-6).map((message) => ({
+      role: message.role,
+      content: message.content.trim().replace(/\s+/g, ' '),
+    })),
+  })
+}
+
+function readAnswerCache() {
+  if (typeof window === 'undefined') return {}
+
+  try {
+    const raw = window.localStorage.getItem(answerCacheStorageKey)
+    if (!raw) return {}
+    return JSON.parse(raw) as Record<string, CachedReply>
+  } catch {
+    return {}
+  }
+}
+
+function writeAnswerCache(cache: Record<string, CachedReply>) {
+  if (typeof window === 'undefined') return
+  window.localStorage.setItem(answerCacheStorageKey, JSON.stringify(cache))
+}
+
+function getCachedReply(lang: Language, messages: Message[]) {
+  const cache = readAnswerCache()
+  const key = buildCacheKey(lang, messages)
+  const item = cache[key]
+
+  if (!item) {
+    return null
+  }
+
+  if (Date.now() - item.createdAt > cacheTtlMs) {
+    delete cache[key]
+    writeAnswerCache(cache)
+    return null
+  }
+
+  return item
+}
+
+function storeCachedReply(lang: Language, messages: Message[], item: Omit<CachedReply, 'createdAt'>) {
+  const cache = readAnswerCache()
+  const key = buildCacheKey(lang, messages)
+  cache[key] = {
+    ...item,
+    createdAt: Date.now(),
+  }
+  writeAnswerCache(cache)
+}
+
+function readFeedbackMap() {
+  if (typeof window === 'undefined') return {}
+
+  try {
+    const raw = window.localStorage.getItem(feedbackStorageKey)
+    if (!raw) return {}
+    return JSON.parse(raw) as Record<string, FeedbackValue>
+  } catch {
+    return {}
+  }
+}
+
+function getFeedbackKey(reviewId?: string, content?: string) {
+  return reviewId || content || ''
+}
+
+function storeFeedbackSelection(reviewId: string | undefined, content: string, feedback: FeedbackValue) {
+  if (typeof window === 'undefined') return
+
+  const key = getFeedbackKey(reviewId, content)
+  if (!key) return
+
+  const map = readFeedbackMap()
+  map[key] = feedback
+  window.localStorage.setItem(feedbackStorageKey, JSON.stringify(map))
+}
+
+function readStoredFeedback(reviewId: string | undefined, content: string) {
+  const key = getFeedbackKey(reviewId, content)
+  if (!key) return undefined
+  return readFeedbackMap()[key]
+}
+
+function buildAssistantMessage(
+  lang: Language,
+  question: string,
+  reply: string,
+  sources: SourceLink[],
+  matchedEntities: string[],
+  reviewId?: string
+): Message {
+  return {
+    role: 'assistant',
+    content: reply,
+    sources,
+    reviewId,
+    feedback: readStoredFeedback(reviewId, reply),
+    followUps: buildFollowUps(lang, question, reply, matchedEntities),
+  }
 }
 
 export function ChatInterface() {
@@ -325,6 +446,22 @@ export function ChatInterface() {
     setIsLoading(true)
 
     try {
+      const cachedReply = getCachedReply(lang, nextMessages)
+      if (cachedReply) {
+        setMessages([
+          ...nextMessages,
+          buildAssistantMessage(
+            lang,
+            question,
+            cachedReply.reply,
+            cachedReply.sources,
+            cachedReply.matchedEntities,
+            cachedReply.reviewId
+          ),
+        ])
+        return
+      }
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -339,19 +476,21 @@ export function ChatInterface() {
         throw new Error(data.error || 'Request failed')
       }
 
+      const reply = data.reply as string
+      const sources = Array.isArray(data.sources) ? (data.sources as SourceLink[]) : []
+      const matchedEntities = Array.isArray(data.matchedEntities) ? (data.matchedEntities as string[]) : []
+      const reviewId = typeof data.reviewId === 'string' ? data.reviewId : undefined
+
+      storeCachedReply(lang, nextMessages, {
+        reply,
+        sources,
+        matchedEntities,
+        reviewId,
+      })
+
       setMessages([
         ...nextMessages,
-        {
-          role: 'assistant',
-          content: data.reply as string,
-          sources: Array.isArray(data.sources) ? (data.sources as SourceLink[]) : [],
-          followUps: buildFollowUps(
-            lang,
-            question,
-            data.reply as string,
-            Array.isArray(data.matchedEntities) ? (data.matchedEntities as string[]) : []
-          ),
-        },
+        buildAssistantMessage(lang, question, reply, sources, matchedEntities, reviewId),
       ])
     } catch (requestError) {
       const message =
@@ -539,6 +678,46 @@ export function ChatInterface() {
     textareaRef.current?.focus()
   }
 
+  async function handleFeedback(index: number, feedback: FeedbackValue) {
+    const message = messages[index]
+    if (!message || message.role !== 'assistant') {
+      return
+    }
+
+    storeFeedbackSelection(message.reviewId, message.content, feedback)
+    setMessages((current) =>
+      current.map((entry, entryIndex) =>
+        entryIndex === index
+          ? {
+              ...entry,
+              feedback,
+            }
+          : entry
+      )
+    )
+
+    if (!message.reviewId) {
+      return
+    }
+
+    const payload =
+      feedback === 'helpful'
+        ? { rating: 'good', notes: 'helpful user-feedback' }
+        : feedback === 'not-accurate'
+          ? { rating: 'bad', notes: 'source-mismatch user-feedback' }
+          : { rating: 'bad', notes: 'generic user-feedback' }
+
+    try {
+      await fetch(`/api/reviews/${message.reviewId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+    } catch {
+      // Local feedback persistence is enough if the server-side review endpoint is unavailable.
+    }
+  }
+
   function toggleTheme() {
     setTheme((current) => (current === 'light' ? 'dark' : 'light'))
   }
@@ -697,6 +876,7 @@ export function ChatInterface() {
               lang={lang}
               onSpeak={!message.role || message.role === 'assistant' ? handleSpeakMessage : undefined}
               onFollowUp={handleFollowUp}
+              onFeedback={message.role === 'assistant' ? (feedback) => void handleFeedback(index, feedback) : undefined}
             />
           ))}
 

@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-03-15T09:45:00Z",
+  "subject": "Transcript-derived snippets from local Jahongir media files",
+  "items": [
+    {
+      "id": "local-english-cambridge-origin",
+      "source_type": "local_transcript",
+      "title": "Local transcript: English, entrepreneurship and Cambridge origin",
+      "topics": ["english", "cambridge", "entrepreneurship", "networking", "teaching"],
+      "summary": "In a local transcript, Jahongir says he started learning English at 15 to enter university, became a teacher at 17, began teaching from his own house, then built Cambridge into one of the biggest learning centers in the country. He links English directly to entrepreneurship, international networking, business forums, and high ambition.",
+      "excerpt": "I started learning English when I was 15. At 17 I became a teacher and started teaching from my own house. As the number of students increased I opened Cambridge. English helped me become an entrepreneur, build an international network, and speak at business forums.",
+      "source_file": "C:/Users/kamol/Downloads/O_zbekistondagi_eng_yirik_o_quv_markazlaridan_biri_asoschisi_J.m4a"
+    },
+    {
+      "id": "local-uzbek-goals-resources",
+      "source_type": "local_transcript",
+      "title": "Local transcript: goals first, resources second",
+      "topics": ["goals", "planning", "execution", "resources", "mindset"],
+      "summary": "In a local Uzbek clip, Jahongir's core idea is that life works in reverse: people should not spend all their energy collecting resources first. They should define the goal first, identify the required resources second, and then gather those resources deliberately.",
+      "excerpt": "Do not spend all your time just collecting resources. Stop, think, define the goal first, and then understand what resources are actually needed to reach it.",
+      "source_file": "C:/Users/kamol/Downloads/Hayot_teskari_ishlidi_Jahongir_Pulatov_discipline_uzb_cambri.m4a"
+    },
+    {
+      "id": "local-sales-funnel-training",
+      "source_type": "local_transcript",
+      "title": "Local transcript: sales funnel, lead flow and conversion",
+      "topics": ["sales", "sales_funnel", "leads", "conversion", "crm", "operations"],
+      "summary": "In a long local training-style transcript, Jahongir explains sales as one of the core business instruments, defines the sales funnel from first contact to repeat purchase, and emphasizes measuring every stage instead of relying on guesswork.",
+      "excerpt": "A sales funnel is the path from first contact to purchase and then repeat purchase. If you do not measure each step, you cannot manage sales properly.",
+      "source_file": "C:/Users/kamol/OneDrive/Рабочий стол/vibe coding/bananaheadshots/data/local-media-chunks/yosh-tadbirkor-part-000.mp3"
+    },
+    {
+      "id": "local-cambridge-sales-optimization",
+      "source_type": "local_transcript",
+      "title": "Local transcript: Cambridge sales optimization and KPIs",
+      "topics": ["cambridge", "sales", "kpi", "weekly_analysis", "retention", "systems"],
+      "summary": "In the second long local transcript chunk, Jahongir says Cambridge continuously improves its sales funnel, tracks weekly numbers, increases conversion at each step, follows up lost customers, and avoids dependence on only one acquisition channel.",
+      "excerpt": "At Cambridge we keep improving the sales funnel. Numbers must be tracked regularly, each conversion step should be improved, and relying on only one channel is a serious mistake.",
+      "source_file": "C:/Users/kamol/OneDrive/Рабочий стол/vibe coding/bananaheadshots/data/local-media-chunks/yosh-tadbirkor-part-001.mp3"
+    }
+  ],
+  "pending_long_files": []
+}

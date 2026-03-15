@@ -1,0 +1,78 @@
+{
+  "fetched_at": "2026-03-15",
+  "subject": "Longform interview and podcast cues for Jahongir Pulatov",
+  "items": [
+    {
+      "id": "mfaktor-mfp36-part1",
+      "source_type": "interview_outline",
+      "title": "Emotsiyadagi qaror | Jahongir Pulatov | MFP-36 (Part 1 outline)",
+      "topics": ["leadership", "decision_making", "cambridge", "team", "energy", "future_vision", "parents", "scaling"],
+      "summary": "MFaktor's public episode outline frames Jahongir around emotional decision-making, Cambridge's path to break-even, losing his entire team, source of energy, long-term future vision, parents' role in business, and what to prepare before scaling.",
+      "segments": [
+        "00:44 Who is Jahongir Pulatov?",
+        "02:00 How long did it take Cambridge to reach break-even?",
+        "03:40 Why did Jahongir Pulatov lose his team completely?",
+        "08:04 Source of endless energy",
+        "08:55 Where does Jahongir see himself in 50 years?",
+        "09:45 Parents' role in business",
+        "11:30 Who does he admire?",
+        "12:35 What must be prepared before scaling a business?"
+      ],
+      "source_url": "https://t.me/s/MFaktorUz/2757"
+    },
+    {
+      "id": "yoshlar-costly-mistakes",
+      "source_type": "interview_topic_page",
+      "title": "Jahongir Pulatov: Tizim yo'qligi qimmatga tushgan",
+      "topics": ["systems", "mistakes", "business_challenges", "lessons_learned"],
+      "summary": "The public feature page explicitly says the discussion covers Jahongir's life and business challenges, mistakes, and lessons under the theme that lack of systems became expensive.",
+      "segments": [
+        "Business and life difficulties",
+        "Mistakes made during growth",
+        "Lessons learned from those mistakes",
+        "Why systems matter operationally"
+      ],
+      "source_url": "https://yoshlarkelajagimiz.uz/jahongir-pulatov-tizim-yoqligi-qimmatga-tushgan/"
+    },
+    {
+      "id": "osmondagi-bolalar-episode",
+      "source_type": "podcast_notes",
+      "title": "Osmondagi Bolalar - Jahongir Pulatov",
+      "topics": ["mission", "motivation", "entrepreneurship", "leadership"],
+      "summary": "The public episode notes frame Jahongir as a motivated entrepreneur with a mission-first worldview where money is treated as a resource rather than the end goal.",
+      "segments": [
+        "Mission before money",
+        "Motivation and entrepreneurial drive",
+        "Leadership framing in a long-form conversation"
+      ],
+      "source_url": "https://rss.com/podcasts/osmondagi-bolalar/2474510/"
+    },
+    {
+      "id": "gashtak-episode",
+      "source_type": "podcast_notes",
+      "title": "GASHTAK - Jahongir Pulatov",
+      "topics": ["business", "founder_journey", "success_image", "books"],
+      "summary": "The public episode page frames him as an entrepreneur who built a large English-learning center network and discusses business, life, the image of success, and a recommended book.",
+      "segments": [
+        "Building a large educational network",
+        "Business and life framing",
+        "Image of a successful person",
+        "Recommended book: Ruhiy tarbiya"
+      ],
+      "source_url": "https://rss.com/podcasts/gashtak/1687885/"
+    },
+    {
+      "id": "maqsad-2023-training",
+      "source_type": "training_description",
+      "title": "MAQSAD 2023: goal setting and achieving goals",
+      "topics": ["goal_setting", "planning", "execution", "personal_development"],
+      "summary": "A public training description presents Jahongir leading a session on setting personal goals correctly and identifying the shortest path toward them.",
+      "segments": [
+        "How to set goals correctly",
+        "How to identify the shortest path to a goal",
+        "Personal planning and execution framing"
+      ],
+      "source_url": "https://rutube.ru/video/3b5d05d60408d95d187d6acd3c020c2a/"
+    }
+  ]
+}

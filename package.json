@@ -1,0 +1,47 @@
+{
+  "name": "banana-headshots",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:detached": "cmd.exe /c scripts\\start-dev.cmd",
+    "dev:stop": "powershell -ExecutionPolicy Bypass -File scripts\\stop-dev.ps1",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "netlify": "netlify",
+    "netlify:login": "netlify login",
+    "netlify:status": "netlify status",
+    "deploy:netlify": "netlify deploy --build --prod",
+    "deploy:netlify:preview": "netlify deploy --build",
+    "repo:publish": "powershell -ExecutionPolicy Bypass -File scripts\\publish-github.ps1",
+    "site:deploy": "powershell -ExecutionPolicy Bypass -File scripts\\deploy-netlify.ps1",
+    "data:youtube": "python scripts\\generate_jahongir_youtube_data.py",
+    "data:youtube:transcripts": "python scripts\\ingest_jahongir_youtube_transcripts.py",
+    "voice:cli": "elevenlabs.cmd --help",
+    "voice:init": "elevenlabs.cmd agents init --no-ui",
+    "voice:login": "elevenlabs.cmd auth login --no-ui"
+  },
+  "dependencies": {
+    "@stripe/stripe-js": "^7.9.0",
+    "next": "^14.2.32",
+    "openai": "^5.16.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
+    "stripe": "^14.12.0"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.9",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "netlify-cli": "^24.2.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}

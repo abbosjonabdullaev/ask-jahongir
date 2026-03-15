@@ -1,0 +1,149 @@
+{
+  "fetched_at": "2026-03-15",
+  "subject": "Jahongir Pulatov business knowledge base",
+  "entities": [
+    {
+      "name": "Cambridge Learning Center",
+      "type": "education_center",
+      "relation_to_jahongir": "Founder-linked organization repeatedly associated with Jahongir Pulatov in public sources",
+      "aliases": ["cambridge", "cambridge lc", "cambridge learning", "cambridge online"],
+      "facts": [
+        "According to the official site, it has operated since 2014.",
+        "According to the official English landing page, it presents itself as having 11+ years of experience as of March 2026.",
+        "According to the official site, it has served 100,000+ learners.",
+        "According to the official site, it has 14 branches across Uzbekistan.",
+        "According to the official site, it has 500+ employees.",
+        "According to the official site, it highlights IELTS outcomes up to 9.0.",
+        "According to the official site, it offers experienced teachers, test center access, free events, co-working zones, and a Be Student program connected to Central Asian University.",
+        "According to the Russian landing page, free student activities can include tennis, golf, mafia, cinema, celebrity meetups, and trips.",
+        "According to the official site, its certificates are recognized by 15+ companies and 10+ universities.",
+        "A public Telegram post says Cambridge started from three small rooms near Xalqlar do'stligi and was built to give English learners modern conditions and quality education.",
+        "A LinkedIn Cambridge job post says the organization publicly presented itself as Brand of the Year 2019-2020 and winner of the HR Brand of 2022 award.",
+        "A LinkedIn Cambridge company post says top teachers can earn a special trip to London, which supports the public signal of a strong performance-and-incentive culture."
+      ],
+      "faq_like_details": [
+        "Placement test required for new students.",
+        "Minimum age listed as 13.",
+        "General English and IELTS-focused programs are highlighted.",
+        "A cashback condition is advertised for certain IELTS results."
+      ],
+      "sources": [
+        "https://cambridgeonline.uz/",
+        "https://cambridgeonline.uz/faq",
+        "https://cambridgeonline.uz/en/landing",
+        "https://cambridgeonline.uz/ru/golden-pages/",
+        "https://uz.linkedin.com/jobs/view/academic-support-at-cambridge-learning-center-at-cambridge-learning-center-in-uzbekistan-3608366743",
+        "https://uz.linkedin.com/company/cambridge-lc"
+      ]
+    },
+    {
+      "name": "Jahon School",
+      "type": "school",
+      "relation_to_jahongir": "Official site names Jahongir Po'latov as founder",
+      "aliases": ["jahon", "jaxon", "jaxon school", "jahonschool"],
+      "facts": [
+        "According to the official site, Jahon School is a project from Cambridge LC.",
+        "Official homepage snippets present Jahongir Po'latov as founder of Cambridge LC, Modme, Cambridge Kidzzz, and Jahon School.",
+        "According to the official about page, Jahongir Po'latov brings 14 years of experience in education into general school education.",
+        "According to the official site, the mission is to unlock student potential, develop social skills, and raise students with exemplary behavior.",
+        "According to the official site, it is a technological school using LMS, gamification, and dedicated apps for teachers, students, and parents.",
+        "According to the official site, the school draws on Japanese and South Korean educational achievements.",
+        "According to the official site, it includes an 11-year SkillDev life-skills program.",
+        "According to the official founder message, Jahon School sees high-quality education as the main solution to deep social problems.",
+        "According to the official about page, the long-term vision is to spread its authorial program for skills, knowledge, and behavior to all regions of Uzbekistan by 2030."
+      ],
+      "admissions_and_operations": [
+        "Admissions steps listed: school visit, school introduction, parent interview, psychologist interview, measuring academic level, final admission.",
+        "FAQ says there is no dormitory.",
+        "FAQ says payments can be split every 6 months or monthly.",
+        "FAQ says annual fees change at most once per year.",
+        "FAQ says uniforms are required.",
+        "FAQ says students receive three meals a day.",
+        "FAQ says parents get app-based monthly updates on attendance, academic performance, mood, mental state, and health."
+      ],
+      "sources": [
+        "https://jahonschool.uz/",
+        "https://jahonschool.uz/admissions",
+        "https://jahonschool.uz/faqs",
+        "https://jahonschool.uz/aboutus/dark"
+      ]
+    },
+    {
+      "name": "Modme",
+      "type": "edtech_software",
+      "relation_to_jahongir": "Official about page names Jahongir Pulatov as founder and CEO",
+      "aliases": ["crm", "lms", "education crm"],
+      "facts": [
+        "According to the official site, Modme is software for education centers.",
+        "According to the official site, it provides CRM and LMS-style capabilities.",
+        "Public feature descriptions include lead management, registration, scheduling, finance, reporting, grading, reminders, integrations, and remote management.",
+        "According to the official site, it also offers student and teacher mobile apps, cloud-based access, and financial reporting.",
+        "Dealroom says Modme launched in 2020 and reached break-even in 2021.",
+        "Dealroom says Modme served 330+ training centers in Uzbekistan by early 2023 and had started expanding into Indonesia.",
+        "Dealroom says Modme raised $100,000 from UzVC in February 2023 at a $1.2 million valuation.",
+        "Dealroom says Modme later launched a white-labeled mobile application for education centers in 2024."
+      ],
+      "sources": [
+        "https://modme.uz/about/",
+        "https://modme.uz/",
+        "https://app.dealroom.co/companies/modme"
+      ]
+    },
+    {
+      "name": "Selfmade",
+      "type": "entrepreneur_community",
+      "relation_to_jahongir": "Publicly associated with Jahongir Pulatov in semi-official sources",
+      "aliases": ["self made", "community", "youth entrepreneur community"],
+      "facts": [
+        "IT Park conference materials identified Jahongir Pulatov as founder of Selfmade.",
+        "Yosh Tadbirkor University described Selfmade as a youth entrepreneur community founded by Jahongir Pulatov."
+      ],
+      "sources": [
+        "https://it-park.uz/en/itpark/news/idea-to-product-conference-for-young-startuppers-in-jizzakh-region",
+        "https://yoshtadbirkor.uz/blog/university"
+      ]
+    },
+    {
+      "name": "Cambridge Kidzzz",
+      "type": "early_education_brand",
+      "relation_to_jahongir": "Official Jahon School site groups it among Jahongir Po'latov's education projects",
+      "aliases": ["kidzzz", "cambridge kids", "kids", "kidzz"],
+      "facts": [
+        "Jahon School official pages group Cambridge Kidzzz together with Cambridge LC, Modme, and Jahon School as part of Jahongir Po'latov's education ecosystem.",
+        "This supports the view that Cambridge Kidzzz is one of the education brands publicly linked to Jahongir Po'latov."
+      ],
+      "sources": [
+        "https://jahonschool.uz/aboutus",
+        "https://jahonschool.uz/dark"
+      ]
+    },
+    {
+      "name": "Get Coffee",
+      "type": "coffee_brand",
+      "relation_to_jahongir": "Publicly associated with Jahongir Pulatov in event listings and promotional posts",
+      "aliases": ["get coffee"],
+      "facts": [
+        "A Fermerlar Maktabi event post identified Jahongir Pulatov as founder of Get Coffee.",
+        "MFaktor promotional posts tied Get Coffee vouchers and giveaways to Jahongir Pulatov's public appearances, which supports the public association between him and the brand."
+      ],
+      "sources": [
+        "https://t.me/s/fermermaktab_uz/87",
+        "https://t.me/s/MFaktorUz?after=2920"
+      ]
+    },
+    {
+      "name": "Hope",
+      "type": "charity_foundation",
+      "relation_to_jahongir": "Publicly associated with Jahongir Pulatov in event listings",
+      "aliases": ["hope charity foundation", "hope"],
+      "facts": [
+        "A Fermerlar Maktabi event post identified Jahongir Pulatov as founder of the Hope charity foundation.",
+        "Public secondary descriptions repeatedly group Hope with Cambridge, Modme, and Get Coffee as part of Jahongir Pulatov's wider project ecosystem, but detailed public operating information remains limited."
+      ],
+      "sources": [
+        "https://t.me/s/fermermaktab_uz/87",
+        "https://commons.wikimedia.org/wiki/File:Jahongir_Pulatov.jpg"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,339 @@
+{
+  "fetched_at": "2026-03-15",
+  "subject": "Curated public snippets and voice signals for Jahongir Pulatov",
+  "snippets": [
+    {
+      "id": "telegram-ethics-2672",
+      "type": "direct_statement",
+      "topics": ["ethics", "entrepreneurship", "discipline", "learning"],
+      "summary": "He stresses that weak results often come from not knowing the craft deeply enough, and he connects ethical business knowledge with baraka, correct decisions, and practical competence.",
+      "style_signal": "direct, principled, pragmatic",
+      "source_title": "Telegram post about halal and competent entrepreneurship",
+      "source_url": "https://t.me/jakhongir_pulatov_blog/2672"
+    },
+    {
+      "id": "latest-book-signal-2672",
+      "type": "current_signal",
+      "topics": ["books", "reading", "entrepreneurship", "ethics"],
+      "summary": "As of 2026-03-11, the latest public book-related post found on Jahongir's Telegram recommends a gifted book about correct and halal entrepreneurship. The post does not clearly expose the exact title in the indexed text, so only the topic is reliable.",
+      "style_signal": "careful, dated, evidence-first",
+      "source_title": "Latest public book-related Telegram post",
+      "source_url": "https://t.me/jakhongir_pulatov_blog/2672"
+    },
+    {
+      "id": "telegram-yuksalish-2662",
+      "type": "direct_statement",
+      "topics": ["achievement", "gratitude", "entrepreneurship"],
+      "summary": "He reacted to being included in Yuksalish's under-35 entrepreneur list with gratitude rather than self-promotion.",
+      "style_signal": "brief, modest, grounded",
+      "source_title": "Telegram post on Yuksalish TOP-20 recognition",
+      "source_url": "https://t.me/jakhongir_pulatov_blog/2662"
+    },
+    {
+      "id": "telegram-westminster-2654",
+      "type": "direct_statement",
+      "topics": ["education", "career", "students"],
+      "summary": "He publicly said he completed Westminster University's Business Management program in 2018 and framed the university question as something young people should think about seriously, not emotionally.",
+      "style_signal": "reflective, practical, mentor-like",
+      "source_title": "Telegram post about receiving his diploma",
+      "source_url": "https://t.me/jakhongir_pulatov_blog/2654"
+    },
+    {
+      "id": "telegram-jahon-school-2634",
+      "type": "organization_signal",
+      "topics": ["jahon_school", "education", "parents", "skilldev"],
+      "summary": "He publicly positioned Jahon School as a comprehensive solution school built around life skills, strong academics without constant tutoring, psychological support, and technology-enabled learning.",
+      "style_signal": "founder message, parent-facing, concrete",
+      "source_title": "Telegram post promoting Jahon School",
+      "source_url": "https://t.me/jakhongir_pulatov_blog/2634"
+    },
+    {
+      "id": "telegram-cambridge-2564",
+      "type": "organization_signal",
+      "topics": ["cambridge", "education", "growth", "mission"],
+      "summary": "He described Cambridge as starting from three small rooms and growing into a 14-branch organization with a mission to change students' lives through modern conditions and quality education.",
+      "style_signal": "mission-driven, founder origin story",
+      "source_title": "Telegram post on Cambridge's 10-year milestone",
+      "source_url": "https://t.me/jakhongir_pulatov_blog/2564"
+    },
+    {
+      "id": "jahon-school-founder-message",
+      "type": "official_message",
+      "topics": ["jahon_school", "founder_message", "education_systems"],
+      "summary": "Jahon School's official founder-facing material presents the school as a long-term systems project that combines academic quality, behavior, technology, and life-skill development rather than just classroom teaching.",
+      "style_signal": "systems-thinking, institution-building",
+      "source_title": "Jahon School official pages",
+      "source_url": "https://jahonschool.uz/aboutus"
+    },
+    {
+      "id": "jahon-school-telegram-facilities",
+      "type": "organization_signal",
+      "topics": ["jahon_school", "facilities", "operations", "parents"],
+      "summary": "Jahon School's official Telegram highlights a five-floor modern school building, a 1.5-hectare secured area, metro access, a 400-seat canteen, summer and winter sports halls, and outdoor learning areas.",
+      "style_signal": "concrete, parent-facing, operational",
+      "source_title": "Jahon School official Telegram facilities post",
+      "source_url": "https://t.me/s/jahon_school/82"
+    },
+    {
+      "id": "jahon-school-telegram-exam",
+      "type": "organization_signal",
+      "topics": ["jahon_school", "admissions", "assessment", "operations"],
+      "summary": "Jahon School's official Telegram describes grade-specific entrance assessment logic and says parents are expected to visit the school and sign a contract before participating in the exam process.",
+      "style_signal": "clear, admissions-oriented, practical",
+      "source_title": "Jahon School official Telegram exam post",
+      "source_url": "https://t.me/s/jahon_school/82"
+    },
+    {
+      "id": "modme-founder-positioning",
+      "type": "official_message",
+      "topics": ["modme", "edtech", "systems", "operations"],
+      "summary": "Modme's official positioning links Jahongir to operational system-building in education: CRM, LMS, reporting, payments, and management discipline.",
+      "style_signal": "operator mindset, process-oriented",
+      "source_title": "Modme about page",
+      "source_url": "https://modme.uz/about/"
+    },
+    {
+      "id": "modme-indonesia-linkedin",
+      "type": "public_interview_signal",
+      "topics": ["modme", "international_growth", "sales", "execution"],
+      "summary": "A public LinkedIn post says the Modme Indonesia team made 10 sales, ran a webinar in English and Bahasa, and set a target of 50+ sales, which is one of the clearest public signs of Modme's international expansion efforts.",
+      "style_signal": "measured, execution-focused, growth-oriented",
+      "source_title": "Jakhongir Pulatov LinkedIn post on Modme Indonesia",
+      "source_url": "https://www.linkedin.com/posts/jakhongirpulatov_team-sales-indonesia-activity-6993035299933032448-9LGA"
+    },
+    {
+      "id": "modme-dealroom-funding",
+      "type": "public_interview_signal",
+      "topics": ["modme", "funding", "valuation", "startup_growth"],
+      "summary": "Dealroom says Modme raised $100,000 from UzVC in February 2023 at a $1.2 million valuation, which is one of the clearest public startup-finance signals tied to Jahongir's software business.",
+      "style_signal": "startup-oriented, factual, growth-stage",
+      "source_title": "Dealroom Modme profile",
+      "source_url": "https://app.dealroom.co/companies/modme"
+    },
+    {
+      "id": "modme-dealroom-scale",
+      "type": "public_interview_signal",
+      "topics": ["modme", "scale", "indonesia", "edtech", "operations"],
+      "summary": "Dealroom says Modme reached break-even in 2021, served 330+ education centers in Uzbekistan by early 2023, and expanded toward Indonesia, which strengthens the public picture of Modme as a real operating SaaS business rather than just a concept.",
+      "style_signal": "operator-first, traction-oriented, pragmatic",
+      "source_title": "Dealroom Modme profile",
+      "source_url": "https://app.dealroom.co/companies/modme"
+    },
+    {
+      "id": "modme-telegram-operator-signal",
+      "type": "organization_signal",
+      "topics": ["modme", "crm", "sales", "client_management", "education_business"],
+      "summary": "Modme's official Telegram repeatedly frames the product around sales discipline, client management, CRM-driven growth, service quality, and practical education-business operations.",
+      "style_signal": "operator-first, tactical, growth-minded",
+      "source_title": "Modme official Telegram channel",
+      "source_url": "https://t.me/s/modme_uz/345"
+    },
+    {
+      "id": "cambridge-telegram-events",
+      "type": "organization_signal",
+      "topics": ["cambridge", "student_experience", "events", "teacher_quality"],
+      "summary": "Cambridge LC's official Telegram shows that the organization emphasizes events, speaking clubs, university visits, London study talks, and visible IELTS result culture alongside the core classes.",
+      "style_signal": "student-centered, energetic, results-oriented",
+      "source_title": "Cambridge LC official Telegram",
+      "source_url": "https://t.me/s/cambridge_learning_center/6250"
+    },
+    {
+      "id": "cambridge-telegram-teacher-incentives",
+      "type": "organization_signal",
+      "topics": ["cambridge", "team", "hiring", "teacher_incentives"],
+      "summary": "Cambridge LC's official Telegram presents unusually strong teacher incentives, including large awards for top teachers, support for regional hires, and a strong internal culture around measurable IELTS outcomes.",
+      "style_signal": "performance-driven, team-focused, ambitious",
+      "source_title": "Cambridge LC Telegram hiring/results posts",
+      "source_url": "https://t.me/s/cambridge_learning_center/6250"
+    },
+    {
+      "id": "cambridge-textbook-signal",
+      "type": "organization_signal",
+      "topics": ["cambridge", "education", "public_recognition", "students"],
+      "summary": "A Cambridge LC Telegram post says Jahongir Pulatov was featured in the 8th grade Tarbiya textbook, framing his story as a public motivation and perseverance example for students.",
+      "style_signal": "public-recognition, youth-facing, motivational but grounded",
+      "source_title": "Cambridge LC Telegram textbook post",
+      "source_url": "https://t.me/s/cambridge_learning_center/4185"
+    },
+    {
+      "id": "cambridge-sunday-events",
+      "type": "organization_signal",
+      "topics": ["cambridge", "events", "student_experience", "education"],
+      "summary": "Cambridge LC Telegram posts say Jahongir publicly framed monthly Sunday Events and trainings around a unified educational theme, which strengthens the signal that Cambridge builds structured student-development experiences beyond classes.",
+      "style_signal": "structured, student-facing, educational",
+      "source_title": "Cambridge LC Telegram Sunday Events posts",
+      "source_url": "https://t.me/s/cambridge_learning_center/4197"
+    },
+    {
+      "id": "cambridge-business-breakfast",
+      "type": "organization_signal",
+      "topics": ["cambridge", "student_motivation", "events", "leadership_access"],
+      "summary": "Cambridge LC Telegram posts show students winning breakfast sessions and trainings with Jahongir Pulatov, reinforcing the public signal that founder access is part of the student experience.",
+      "style_signal": "accessible-leadership, student-facing, motivational",
+      "source_title": "Cambridge LC Telegram breakfast/training posts",
+      "source_url": "https://t.me/s/cambridge_learning_center/5418"
+    },
+    {
+      "id": "cambridge-training-leadership",
+      "type": "organization_signal",
+      "topics": ["cambridge", "team_training", "leadership", "culture"],
+      "summary": "Cambridge LC Telegram posts repeatedly show Jahongir leading internal trainings for staff and students, which supports the public image of him as an operator who stays close to training and culture-building.",
+      "style_signal": "hands-on, leadership-through-training, operator-first",
+      "source_title": "Cambridge LC Telegram training posts",
+      "source_url": "https://t.me/s/cambridge_learning_center/6496"
+    },
+    {
+      "id": "cambridge-linkedin-awards",
+      "type": "public_interview_signal",
+      "topics": ["cambridge", "employer_brand", "awards", "team"],
+      "summary": "A LinkedIn Cambridge job post says the organization publicly presented itself as Brand of the Year 2019-2020 and winner of the HR Brand of 2022 award, which adds credibility to its employer-brand signal.",
+      "style_signal": "credibility, ambitious, employer-focused",
+      "source_title": "Cambridge LinkedIn job post",
+      "source_url": "https://uz.linkedin.com/jobs/view/academic-support-at-cambridge-learning-center-at-cambridge-learning-center-in-uzbekistan-3608366743"
+    },
+    {
+      "id": "cambridge-linkedin-london",
+      "type": "organization_signal",
+      "topics": ["cambridge", "teacher_incentives", "london", "team_culture"],
+      "summary": "A public LinkedIn Cambridge company post says top teachers could receive a London trip, which reinforces the visible public image of a high-performance and incentive-driven team culture.",
+      "style_signal": "ambitious, incentive-driven, performance-focused",
+      "source_title": "Cambridge LinkedIn company post",
+      "source_url": "https://uz.linkedin.com/company/cambridge-lc"
+    },
+    {
+      "id": "cambridge-russian-landing-events",
+      "type": "organization_signal",
+      "topics": ["cambridge", "student_experience", "events", "community"],
+      "summary": "The Russian Cambridge landing page says student life can include free tennis, golf, mafia, cinema, celebrity meetups, and trips, which expands the public picture of Cambridge beyond IELTS preparation alone.",
+      "style_signal": "experience-led, energetic, student-facing",
+      "source_title": "Cambridge Russian landing page",
+      "source_url": "https://cambridgeonline.uz/ru/golden-pages/"
+    },
+    {
+      "id": "wiut-kelajak-bunyodkori",
+      "type": "public_interview_signal",
+      "topics": ["awards", "education", "cambridge", "credibility"],
+      "summary": "A Westminster post says Jahongir received the Kelajak Bunyodkori Medal in 2022 and presents Cambridge as one of Uzbekistan's largest educational centres with 500+ staff.",
+      "style_signal": "credibility, achievement, education leadership",
+      "source_title": "WIUT LinkedIn post",
+      "source_url": "https://www.linkedin.com/posts/wiut-uni-uz_president-shavkat-mirziyoyev-recognises-wiut-activity-7213536928158105601-3BhY"
+    },
+    {
+      "id": "rss-tagline",
+      "type": "public_quote_signal",
+      "topics": ["mission", "motivation", "entrepreneurship"],
+      "summary": "A public podcast page associated with him uses the idea that money is only a resource, while the larger mission is to change the world.",
+      "style_signal": "mission-first, ambitious, values-led",
+      "source_title": "Public podcast page",
+      "source_url": "https://rss.com/podcasts/osmondagi-bolalar/2474510/"
+    },
+    {
+      "id": "jahon-school-2030-vision",
+      "type": "official_message",
+      "topics": ["jahon_school", "vision", "education_reform", "scale"],
+      "summary": "Jahon School's official founder-facing message frames quality education as the core answer to larger social issues and sets a 2030 goal of spreading its authorial system for skills, knowledge, and behavior across Uzbekistan.",
+      "style_signal": "institution-building, long-term, reform-minded",
+      "source_title": "Jahon School founder message and about page",
+      "source_url": "https://jahonschool.uz/aboutus/dark"
+    },
+    {
+      "id": "mfaktor-business-webinar",
+      "type": "public_interview_signal",
+      "topics": ["entrepreneurship", "business_growth", "systems", "leadership"],
+      "summary": "An MFaktor public event listing presents Jahongir as someone speaking about how to start a business and how to scale it, reinforcing the systems-and-growth operator framing around his public profile.",
+      "style_signal": "practical, scaling-focused, founder-operator",
+      "source_title": "MFaktor event listing",
+      "source_url": "https://t.me/s/MFaktorUz/2757"
+    },
+    {
+      "id": "mfaktor-mars-it-association",
+      "type": "public_interview_signal",
+      "topics": ["mars_it_school", "project_ecosystem", "entrepreneurship"],
+      "summary": "A Cambridge LC Telegram training post publicly grouped Mars IT School with Cambridge and Modme among projects associated with Jahongir Pulatov, which is another public ecosystem signal even though official detail remains limited.",
+      "style_signal": "ecosystem-building, secondary-source, public-association",
+      "source_title": "Cambridge LC Telegram training post",
+      "source_url": "https://t.me/s/cambridge_learning_center/5320"
+    },
+    {
+      "id": "camon-crisis-webinar",
+      "type": "public_interview_signal",
+      "topics": ["leadership", "crisis_management", "team", "entrepreneurship"],
+      "summary": "A public Camon webinar listing positions Jahongir in a discussion about crises, mistakes, and team decisions, which strengthens the evidence that his public image is not only educational but also managerial and operational.",
+      "style_signal": "calm under pressure, managerial, realistic",
+      "source_title": "Camon webinar listing",
+      "source_url": "https://camon.uz/en/62781"
+    },
+    {
+      "id": "spot-books-reading",
+      "type": "public_interview_signal",
+      "topics": ["reading", "learning", "self_development"],
+      "summary": "Spot's public article ties Jahongir to a reading habit and book recommendations, which supports answers about learning, self-development, and intellectual discipline.",
+      "style_signal": "reading-driven, self-improving, reflective",
+      "source_title": "Spot article on recommended books",
+      "source_url": "https://www.spot.uz/oz/2023/11/30/books/"
+    },
+    {
+      "id": "spot-daily-reading",
+      "type": "public_interview_signal",
+      "topics": ["reading", "books", "discipline", "habits"],
+      "summary": "Spot quotes Jahongir as someone who made daily reading a habit and gravitates toward business, personal development, history, and autobiographical books.",
+      "style_signal": "habit-based, disciplined, intellectually curious",
+      "source_title": "Spot books interview",
+      "source_url": "https://www.spot.uz/oz/2023/11/30/books/"
+    },
+    {
+      "id": "yoshlar-systems-costly",
+      "type": "public_interview_signal",
+      "topics": ["systems", "mistakes", "business_growth", "leadership"],
+      "summary": "A public Youth Future Foundation feature introduces Jahongir through the idea that the absence of systems became expensive, and frames the discussion around his business challenges, mistakes, and lessons learned.",
+      "style_signal": "systems-first, candid, lesson-oriented",
+      "source_title": "Yoshlar kelajagimiz feature",
+      "source_url": "https://yoshlarkelajagimiz.uz/jahongir-pulatov-tizim-yoqligi-qimmatga-tushgan/"
+    },
+    {
+      "id": "gashtak-business-image",
+      "type": "public_interview_signal",
+      "topics": ["business", "cambridge", "founder_journey", "leadership"],
+      "summary": "The GASHTAK podcast page presents Jahongir as one of the few entrepreneurs who built a large-network business model inside English learning centers, and frames the conversation around business and the image of a successful person in life.",
+      "style_signal": "founder-story, ambitious, practical",
+      "source_title": "GASHTAK podcast episode page",
+      "source_url": "https://rss.com/podcasts/gashtak/1687885/"
+    },
+    {
+      "id": "gashtak-book-recommendation",
+      "type": "public_interview_signal",
+      "topics": ["books", "spirituality", "self_development"],
+      "summary": "The GASHTAK episode notes include a recommended book, 'Ruhiy tarbiya', which adds one more public signal that Jahongir's public speaking often ties business growth to inner development and discipline.",
+      "style_signal": "values-led, self-development oriented",
+      "source_title": "GASHTAK podcast notes",
+      "source_url": "https://rss.com/podcasts/gashtak/1687885/"
+    },
+    {
+      "id": "osmondagi-bolalar-longform",
+      "type": "public_interview_signal",
+      "topics": ["mission", "motivation", "entrepreneurship", "podcast"],
+      "summary": "The Osmondagi Bolalar episode positions Jahongir as a high-energy entrepreneur whose motivation is mission-first rather than money-first, reinforcing the public framing around ambition, purpose, and leadership.",
+      "style_signal": "mission-first, energetic, aspirational but grounded",
+      "source_title": "Osmondagi Bolalar podcast episode",
+      "source_url": "https://rss.com/podcasts/osmondagi-bolalar/2474510/"
+    },
+    {
+      "id": "getcoffee-public-association",
+      "type": "public_interview_signal",
+      "topics": ["get_coffee", "brand_ecosystem", "entrepreneurship"],
+      "summary": "A Fermerlar Maktabi event post publicly identified Jahongir Pulatov as founder of Get Coffee, which is one of the clearer public signals linking him to a coffee-brand business outside education.",
+      "style_signal": "ecosystem-building, founder-linked, secondary-source",
+      "source_title": "Fermerlar Maktabi event post",
+      "source_url": "https://t.me/s/fermermaktab_uz/87"
+    },
+    {
+      "id": "hope-public-association",
+      "type": "public_interview_signal",
+      "topics": ["hope", "charity", "social_impact", "brand_ecosystem"],
+      "summary": "The same Fermerlar Maktabi event post publicly identified Jahongir Pulatov as founder of the Hope charity foundation, which supports the public picture of a wider social-impact layer in his ecosystem.",
+      "style_signal": "social-impact, founder-linked, secondary-source",
+      "source_title": "Fermerlar Maktabi event post",
+      "source_url": "https://t.me/s/fermermaktab_uz/87"
+    }
+  ]
+}

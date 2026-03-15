@@ -1,0 +1,159 @@
+{
+  "generated_at": "2026-03-15T12:15:00Z",
+  "subject": "Curated YouTube insights from Jahongir Pulatov's public channel",
+  "items": [
+    {
+      "id": "yt-curated-channel-mission",
+      "type": "curated_video_insight",
+      "topics": ["education", "entrepreneurship", "motivation", "mission"],
+      "summary": "In his channel introduction, Jahongir presents the channel as a place to share practical knowledge, real business experience, and content that should cause visible change in the viewer's life.",
+      "style_signal": "direct, mission-driven, useful-over-performative",
+      "source_title": "Kanalimga xush kelibsiz! | Jakhongir Pulatov",
+      "source_url": "https://www.youtube.com/watch?v=IDRfM669gyc"
+    },
+    {
+      "id": "yt-curated-founder-origin",
+      "type": "curated_video_insight",
+      "topics": ["founder_journey", "cambridge", "english", "education", "entrepreneurship"],
+      "summary": "In his introduction video, Jahongir says he taught English from age 17, then turned that activity into a business at 20 after entering Westminster, which is one of the clearest public origin stories for Cambridge.",
+      "style_signal": "founder-story, grounded, personal-but-practical",
+      "source_title": "Jakhongir Pulatov - Tanishuv",
+      "source_url": "https://www.youtube.com/watch?v=8klvZKq1Ypg"
+    },
+    {
+      "id": "yt-curated-big-goals",
+      "type": "curated_video_insight",
+      "topics": ["goals", "mindset", "ambition", "family_values"],
+      "summary": "In the same founder-story video, he frames big goals as something shaped early by family culture and ties ambition to asking boldly, acting consistently, and staying inside ethical boundaries.",
+      "style_signal": "ambitious, values-led, expansive",
+      "source_title": "Jakhongir Pulatov - Tanishuv",
+      "source_url": "https://www.youtube.com/watch?v=8klvZKq1Ypg"
+    },
+    {
+      "id": "yt-curated-business-mistakes-expectations",
+      "type": "curated_video_insight",
+      "topics": ["business_mistakes", "expectations", "small_business", "execution"],
+      "summary": "In his video on six business mistakes, Jahongir warns that one of the first mistakes is entering business with unrealistic expectations about speed, returns, and ease.",
+      "style_signal": "operator-first, candid, expectation-resetting",
+      "source_title": "Biznes boshlashdagi 6 ta xato",
+      "source_url": "https://www.youtube.com/watch?v=R_FRpPzxx30"
+    },
+    {
+      "id": "yt-curated-business-mistakes-learning",
+      "type": "curated_video_insight",
+      "topics": ["business_mistakes", "learning", "internet_learning", "discipline"],
+      "summary": "In the same business-mistakes video, he recommends consistent learning from the internet and practical study instead of waiting for perfect readiness before starting.",
+      "style_signal": "self-learning, pragmatic, disciplined",
+      "source_title": "Biznes boshlashdagi 6 ta xato",
+      "source_url": "https://www.youtube.com/watch?v=R_FRpPzxx30"
+    },
+    {
+      "id": "yt-curated-selfmade-stereotypes",
+      "type": "curated_video_insight",
+      "topics": ["selfmade", "entrepreneurship", "youth", "beliefs"],
+      "summary": "In the Selfmade entrepreneur series, Jahongir says one goal is to break the stereotype that success requires crooked methods, huge money, or elite connections.",
+      "style_signal": "belief-breaking, youth-facing, practical",
+      "source_title": "Biznesni maqsadi pul emas, aksincha insonlar hayotini o'zgartirish - SHAHA DOLIMOV bilan suhbat",
+      "source_url": "https://www.youtube.com/watch?v=xBBkRcvMbgo"
+    },
+    {
+      "id": "yt-curated-halal-business",
+      "type": "curated_video_insight",
+      "topics": ["ethics", "halal_business", "entrepreneurship", "leadership"],
+      "summary": "In the same Selfmade format, he presents halal, correct, and relationship-aware business conduct as a core standard rather than a side topic.",
+      "style_signal": "principled, firm, ethics-first",
+      "source_title": "Biznesni maqsadi pul emas, aksincha insonlar hayotini o'zgartirish - SHAHA DOLIMOV bilan suhbat",
+      "source_url": "https://www.youtube.com/watch?v=xBBkRcvMbgo"
+    },
+    {
+      "id": "yt-curated-education-big-ideas",
+      "type": "curated_video_insight",
+      "topics": ["education", "mission", "leadership", "societal_impact"],
+      "summary": "In his Azon TV interview, Jahongir frames education as something that should be approached with larger ideas and social purpose, not only as a money-driven business.",
+      "style_signal": "education-first, mission-led, institution-building",
+      "source_title": "Katta g'oyalar bilan ta'limga yondashishimiz lozim",
+      "source_url": "https://www.youtube.com/watch?v=ZccFsM68IIk"
+    },
+    {
+      "id": "yt-curated-education-talent-problem",
+      "type": "curated_video_insight",
+      "topics": ["education", "team", "teacher_quality", "talent"],
+      "summary": "In that same education interview, he identifies the staffing and talent problem as one of the heaviest constraints across learning centers and education projects.",
+      "style_signal": "managerial, realistic, quality-focused",
+      "source_title": "Katta g'oyalar bilan ta'limga yondashishimiz lozim",
+      "source_url": "https://www.youtube.com/watch?v=ZccFsM68IIk"
+    },
+    {
+      "id": "yt-curated-university-risk",
+      "type": "curated_video_insight",
+      "topics": ["university", "career", "decision_making", "youth"],
+      "summary": "In his university-risk video, Jahongir argues that the bigger risk is not university itself but entering without clarity and spending years on a path chosen emotionally or by inertia.",
+      "style_signal": "mentor-like, serious, decision-focused",
+      "source_title": "Universitetga topshirishdagi eng katta tavakkal",
+      "source_url": "https://www.youtube.com/watch?v=8EIfU0mEVdk"
+    },
+    {
+      "id": "yt-curated-goals-beyond-self",
+      "type": "curated_video_insight",
+      "topics": ["goals", "purpose", "service", "leadership"],
+      "summary": "In the same university-risk video, he explains that goals mature from personal survival toward family, society, and service, and that stronger goals create stronger discipline.",
+      "style_signal": "purpose-driven, structured, growth-oriented",
+      "source_title": "Universitetga topshirishdagi eng katta tavakkal",
+      "source_url": "https://www.youtube.com/watch?v=8EIfU0mEVdk"
+    },
+    {
+      "id": "yt-curated-networking",
+      "type": "curated_video_insight",
+      "topics": ["networking", "relationships", "entrepreneurship", "growth"],
+      "summary": "In his networking video, Jahongir treats relationships as leverage that expands opportunity, learning, and business growth, not as empty socializing.",
+      "style_signal": "practical, opportunity-focused, socially-aware",
+      "source_title": "Ko'nikmalar #3 - Qanday qilib tanish-bilish orttirsa bo'ladi? Networking haqida!",
+      "source_url": "https://www.youtube.com/watch?v=tk22FSYGpVA"
+    },
+    {
+      "id": "yt-curated-confidence",
+      "type": "curated_video_insight",
+      "topics": ["confidence", "self_development", "habits", "execution"],
+      "summary": "In his confidence video, Jahongir frames self-belief as something built through preparation, repeated action, and internal discipline rather than performance or empty positivity.",
+      "style_signal": "calm, practical, confidence-through-action",
+      "source_title": "Ko'nikmalar #1 - O'ziga Ishonch",
+      "source_url": "https://www.youtube.com/watch?v=_E4XVaBijOU"
+    },
+    {
+      "id": "yt-curated-productivity",
+      "type": "curated_video_insight",
+      "topics": ["productivity", "discipline", "planning", "focus"],
+      "summary": "In his productivity video, Jahongir frames effectiveness as doing the right important work in a disciplined way, not just staying busy or looking active.",
+      "style_signal": "disciplined, anti-busywork, execution-focused",
+      "source_title": "Ko'nikmalar #2 - Samaradorlik",
+      "source_url": "https://www.youtube.com/watch?v=YXrtxjSofaI"
+    },
+    {
+      "id": "yt-curated-abiturient-advice",
+      "type": "curated_video_insight",
+      "topics": ["students", "abiturient", "education", "exam_preparation"],
+      "summary": "In his advice video for applicants and students, Jahongir treats exam preparation as a practical discipline problem and focuses on readiness, calmness, and process.",
+      "style_signal": "mentor-like, calm, student-facing",
+      "source_title": "Abiturientlarga va O'quvchilarga Maslahat",
+      "source_url": "https://www.youtube.com/watch?v=V8_2wzMIMOM"
+    },
+    {
+      "id": "yt-curated-team-university",
+      "type": "curated_video_insight",
+      "topics": ["university", "entrepreneurship", "education", "career"],
+      "summary": "In his TEAM University discussion, Jahongir engages the question of whether entrepreneurs need university and treats formal education as useful when it is tied to direction, environment, and application.",
+      "style_signal": "balanced, contextual, non-dogmatic",
+      "source_title": "TEAM Universiteti haqida suhbat",
+      "source_url": "https://www.youtube.com/watch?v=HzpJOsRp8gk"
+    },
+    {
+      "id": "yt-curated-selfmade-role-models",
+      "type": "curated_video_insight",
+      "topics": ["selfmade", "entrepreneurship", "role_models", "youth"],
+      "summary": "In the Selfmade Tadbirkor series, Jahongir uses local founder stories to show that young people can build serious businesses without waiting for perfect conditions.",
+      "style_signal": "local, credible, anti-excuse",
+      "source_title": "\"SELFMADE TADBIRKOR\" - Safia qandolat uyi asoschilaridan Bekzod Samigjanov bilan suhbat",
+      "source_url": "https://www.youtube.com/watch?v=RP3IRLHi5YE"
+    }
+  ]
+}

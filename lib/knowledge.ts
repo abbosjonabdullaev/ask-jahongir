@@ -271,6 +271,13 @@ function prioritizeSources(sources: SourceLink[]) {
 function isWeakCrossTopicSource(source: SourceLink, matchedEntities: string[], responseMode: ResponseMode) {
   if (responseMode === 'ecosystem') {
     if (
+      source.kind === 'voice_set' &&
+      !/Jahon School official about page/i.test(source.title)
+    ) {
+      return true
+    }
+
+    if (
       source.kind === 'youtube_curated' ||
       source.kind === 'youtube' ||
       source.kind === 'youtube_transcript' ||

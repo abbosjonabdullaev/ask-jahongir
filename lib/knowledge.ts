@@ -1,4 +1,5 @@
 import businessKnowledge from '@/data/jahongir-business-knowledge.json'
+import entityDirectoriesData from '@/data/jahongir-entity-directories.json'
 import longformContentData from '@/data/jahongir-longform-content.json'
 import publicSnippetsData from '@/data/jahongir-public-snippets.json'
 import transcriptSnippetsData from '@/data/jahongir-transcript-snippets.json'
@@ -25,6 +26,28 @@ type BusinessKnowledge = {
   fetched_at: string
   subject: string
   entities: KnowledgeEntity[]
+}
+
+type DirectorySection = {
+  id: string
+  topic: string
+  title: string
+  summary: string
+  details: string[]
+  source_title: string
+  source_url: string
+}
+
+type EntityDirectory = {
+  entity_name: string
+  topics: string[]
+  sections: DirectorySection[]
+}
+
+type EntityDirectoriesData = {
+  generated_at: string
+  subject: string
+  entities: EntityDirectory[]
 }
 
 type TelegramPost = {
@@ -177,6 +200,7 @@ export type SourceLink = {
   url: string
   kind:
     | 'entity'
+    | 'directory'
     | 'telegram_post'
     | 'public_snippet'
     | 'longform'
@@ -200,6 +224,7 @@ export type ResponseMode =
   | 'general'
 
 const knowledge = businessKnowledge as BusinessKnowledge
+const entityDirectories = entityDirectoriesData as EntityDirectoriesData
 const longform = longformContentData as LongformContentData
 const telegram = telegramKnowledge as TelegramKnowledge
 const publicSnippets = publicSnippetsData as PublicSnippetsData
@@ -247,6 +272,8 @@ function sourcePriority(source: SourceLink) {
   switch (source.kind) {
     case 'entity':
       return 100 + reviewAdjustment
+    case 'directory':
+      return 98 + reviewAdjustment
     case 'voice_set':
       return 95 + reviewAdjustment
     case 'voice_bank':
@@ -891,6 +918,65 @@ function scoreEntityLine(query: string, responseMode: ResponseMode, line: string
   return score
 }
 
+function scoreDirectorySection(
+  query: string,
+  matchedEntityNames: string[],
+  section: DirectorySection,
+  entityName: string
+) {
+  const haystack = normalize(
+    [entityName, section.topic, section.title, section.summary, ...section.details].join(' ')
+  )
+  let score = 0
+
+  if (matchedEntityNames.includes(entityName)) {
+    score += 8
+  }
+
+  for (const token of tokenize(query)) {
+    if (haystack.includes(token)) {
+      score += 1
+    }
+  }
+
+  if (
+    /(phone|phone number|contact|contacts|address|location|where is|telefon|telefon raqam|raqam|aloqa|bog'lan|manzil|metro)/i.test(query) &&
+    /(contact|location|phone|address)/i.test(section.topic + ' ' + section.title)
+  ) {
+    score += 4
+  }
+
+  if (
+    /(branch|branches|filial|filiallar)/i.test(query) &&
+    /(branch|branches)/i.test(section.topic + ' ' + section.title)
+  ) {
+    score += 4
+  }
+
+  if (
+    /(admission|admissions|apply|application|qabul)/i.test(query) &&
+    /(admission|registration)/i.test(section.topic + ' ' + section.title)
+  ) {
+    score += 4
+  }
+
+  if (
+    /(price|pricing|fee|fees|tuition|payment|discount|chegirma|to'lov|tolov)/i.test(query) &&
+    /(pricing|payment)/i.test(section.topic + ' ' + section.title)
+  ) {
+    score += 4
+  }
+
+  if (
+    /(support|demo|telegram|manager|sales|docs|documentation)/i.test(query) &&
+    /(support|demo|contact)/i.test(section.topic + ' ' + section.title)
+  ) {
+    score += 4
+  }
+
+  return score
+}
+
 function pickRelevantEntityLines(query: string, responseMode: ResponseMode, lines: string[] | undefined, limit: number) {
   if (!lines?.length) {
     return []
@@ -964,6 +1050,25 @@ function renderEntitySection(
   }
 
   return lines.join('\n')
+}
+
+function renderDirectorySection(entityName: string, section: DirectorySection, sources: SourceLink[]) {
+  sources.push({
+    title: `${entityName} official directory`,
+    url: section.source_url,
+    kind: 'directory',
+  })
+
+  return [
+    `Official directory pack: ${entityName}`,
+    `Directory topic: ${section.topic}`,
+    `Title: ${section.title}`,
+    `Summary: ${section.summary}`,
+    'Details:',
+    ...section.details.map((detail) => `- ${detail}`),
+    `Source title: ${section.source_title}`,
+    `Source: ${section.source_url}`,
+  ].join('\n')
 }
 
 function renderTelegramSection(post: TelegramPost, sources: SourceLink[]) {
@@ -1148,6 +1253,21 @@ export function buildKnowledgeContext(messages: Array<{ role: 'user' | 'assistan
     .sort((left, right) => right.score - left.score)
     .slice(0, 1)
 
+  const matchedEntityNames = rankedEntities.map(({ entity }) => entity.name)
+  const responseMode = inferResponseMode(currentQuery || query, rankedEntities.length)
+
+  const rankedDirectorySections = entityDirectories.entities
+    .flatMap((entityDirectory) =>
+      entityDirectory.sections.map((section) => ({
+        entityName: entityDirectory.entity_name,
+        section,
+        score: scoreDirectorySection(query, matchedEntityNames, section, entityDirectory.entity_name),
+      }))
+    )
+    .filter((item) => item.score >= 5)
+    .sort((left, right) => right.score - left.score)
+    .slice(0, responseMode === 'logistics' ? 2 : 1)
+
   const rankedPosts = telegram.posts
     .map((post) => ({ post, score: scorePost(query, post) }))
     .filter((item) => item.score > 0)
@@ -1202,7 +1322,6 @@ export function buildKnowledgeContext(messages: Array<{ role: 'user' | 'assistan
     .sort((left, right) => right.score - left.score)
     .slice(0, 1)
 
-  const responseMode = inferResponseMode(currentQuery || query, rankedEntities.length)
   const sources: SourceLink[] = []
   const sections: string[] = []
   const includeYouTubeOutline = /(youtube|video|kanal|channel|short|shorts)/i.test(query)
@@ -1218,6 +1337,15 @@ export function buildKnowledgeContext(messages: Array<{ role: 'user' | 'assistan
       [
         'Selected organization context:',
         ...rankedEntities.map(({ entity }) => renderEntitySection(entity, sources, currentQuery || query, responseMode)),
+      ].join('\n\n')
+    )
+  }
+
+  if (rankedDirectorySections.length > 0) {
+    sections.push(
+      [
+        'Selected official directory and logistics context:',
+        ...rankedDirectorySections.map(({ entityName, section }) => renderDirectorySection(entityName, section, sources)),
       ].join('\n\n')
     )
   }

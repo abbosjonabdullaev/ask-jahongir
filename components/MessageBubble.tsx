@@ -35,6 +35,7 @@ function sourceKindLabel(source: SourceLink, lang: Language) {
   const t = UI_TEXT[lang]
   switch (source.kind) {
     case 'entity':
+    case 'directory':
       return t.officialSource
     case 'telegram_post':
       return t.telegramSource

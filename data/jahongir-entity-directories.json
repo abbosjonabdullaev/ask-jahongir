@@ -1,0 +1,191 @@
+{
+  "generated_at": "2026-03-15",
+  "subject": "Jahongir Pulatov official entity directory packs",
+  "entities": [
+    {
+      "entity_name": "Cambridge Learning Center",
+      "topics": ["branches", "contact", "location", "registration"],
+      "sections": [
+        {
+          "id": "cambridge-contact",
+          "topic": "contact",
+          "title": "Cambridge official contact pack",
+          "summary": "Official main contact and general offline coverage.",
+          "details": [
+            "Main phone number: +998 78 777 77 74.",
+            "Classes are publicly described as offline in Tashkent, Fergana, and Samarkand.",
+            "Legal entity in the public offer: CAMBRIDGE GROUP LLC.",
+            "Legal address in the public offer: Tashkent city, Chilonzor district, Olmazor massivi, 6/7."
+          ],
+          "source_title": "Cambridge official contact and offer pages",
+          "source_url": "https://cambridgeonline.uz/"
+        },
+        {
+          "id": "cambridge-branches",
+          "topic": "branches",
+          "title": "Cambridge branch directory",
+          "summary": "Publicly listed branch names and landmarks from the official branches page.",
+          "details": [
+            "Cambridge Sergeli: Sirg'ali tumani, Yangihayot metro bekati. Landmark: Sirg'ali tumani Hokimiyati.",
+            "Cambridge Inyaz: Chilonzor tumani, Chilonzor metro bekati. Landmark: O'zbekiston Davlat Jahon Tillari Universiteti.",
+            "Cambridge Drujba 1: Chilonzor tumani, Xalqlar do'stligi metro bekati. Landmark: TBC Bank Uzbekistan, former Tommy Hilfiger store.",
+            "Cambridge Drujba 2: Chilonzor tumani, Xalqlar do'stligi metro bekati. Landmark: TBC Bank Uzbekistan, former Tommy Hilfiger store.",
+            "Cambridge Darxon: Mirzo Ulug'bek tumani, Hamid Olimjon metro stansiyasi. Landmark: Ipoteka Bank.",
+            "Cambridge Tinchlik: Shayxontohur tumani, Tinchlik metro bekati. Landmark: Bursa restorani.",
+            "Cambridge Yunusobod: Yunusobod tumani, Yunusobod metro bekati. Landmark: Megaplanet shopping center.",
+            "Cambridge Novza: Chilonzor tumani, Novza metro bekati. Landmark: Korzinka supermarket, 2nd and 3rd floors.",
+            "Cambridge Ferghana: Farg'ona viloyati, Quvasoy ko'chasi. Landmark: Najot ta'lim learning center.",
+            "Cambridge Samarkand: Samarqand viloyati, Shohrux Mirzo ko'chasi, 7."
+          ],
+          "source_title": "Cambridge branches page",
+          "source_url": "https://cambridgeonline.uz/branches/"
+        },
+        {
+          "id": "cambridge-registration",
+          "topic": "registration",
+          "title": "Cambridge registration and course logistics",
+          "summary": "Publicly stated registration and course logistics.",
+          "details": [
+            "Placement test is required for new students.",
+            "Minimum age publicly listed: 13.",
+            "General English is described as 5 levels, each lasting 3 months, with classes 3 times per week for 80 minutes.",
+            "IELTS-focused programs are publicly highlighted.",
+            "The public pages used here do not show a fixed public tuition list, so exact course fees should not be invented."
+          ],
+          "source_title": "Cambridge FAQ and registration pages",
+          "source_url": "https://cambridgeonline.uz/faq"
+        }
+      ]
+    },
+    {
+      "entity_name": "Jahon School",
+      "topics": ["contact", "location", "admission", "payment", "parent_app"],
+      "sections": [
+        {
+          "id": "jahon-contact",
+          "topic": "contact",
+          "title": "Jahon School contact pack",
+          "summary": "Official phone number and school location.",
+          "details": [
+            "Main phone number: +998 78 777 07 07.",
+            "Publicly listed location: Tashkent city, Olmazor district, Beruniy street, 83.",
+            "Public landmark signal: near Tinchlik metro station.",
+            "Official pages also use consultation and information-request forms for parents."
+          ],
+          "source_title": "Jahon School official pages",
+          "source_url": "https://jahonschool.uz/"
+        },
+        {
+          "id": "jahon-admission",
+          "topic": "admission",
+          "title": "Jahon School admission flow",
+          "summary": "Publicly listed admission stages from the official admissions page.",
+          "details": [
+            "School visit.",
+            "School introduction.",
+            "Parent interview.",
+            "Psychologist interview.",
+            "Academic level measurement.",
+            "Final admission decision."
+          ],
+          "source_title": "Jahon School admissions page",
+          "source_url": "https://jahonschool.uz/admissions"
+        },
+        {
+          "id": "jahon-payment",
+          "topic": "payment",
+          "title": "Jahon School payment and fee handling",
+          "summary": "Officially visible payment structure and fee constraints.",
+          "details": [
+            "The exact tuition amount is not publicly listed in the official pages used here.",
+            "Payment can be split every 6 months or monthly.",
+            "The annual fee can change at most once per year.",
+            "A 15% early admissions-season discount was publicly announced through June 1, 2025, and should be treated as a dated signal rather than assumed current."
+          ],
+          "source_title": "Jahon School FAQs",
+          "source_url": "https://jahonschool.uz/faqs"
+        },
+        {
+          "id": "jahon-parent-app",
+          "topic": "parent_app",
+          "title": "Jahon School parent and student app logistics",
+          "summary": "Publicly described parent reporting and student-app functions.",
+          "details": [
+            "Parents receive app-based monthly updates on attendance, academic performance, mood, mental state, and health.",
+            "The JS O'quvchi app publicly describes timetable, homework, progress, grades, menu, and rewards/shop functions.",
+            "The developer listing under Jakhongir Pulatov also shows a parent-side app signal."
+          ],
+          "source_title": "Jahon School FAQs and app listings",
+          "source_url": "https://apps.apple.com/cr/app/js-oquvchi/id6748948691"
+        }
+      ]
+    },
+    {
+      "entity_name": "Modme",
+      "topics": ["contact", "support", "demo", "pricing", "legal"],
+      "sections": [
+        {
+          "id": "modme-contact",
+          "topic": "contact",
+          "title": "Modme contact pack",
+          "summary": "Official phone, address, and communication channels.",
+          "details": [
+            "Main phone number: +998 (78) 777-11-00.",
+            "Legal address: Tashkent city, Mirzo-Ulugbek district, Navnihol mahalla, Tepamasjid street, 4A.",
+            "Public support Telegram: t.me/modme_support.",
+            "Public project manager Telegram: t.me/modme_manager.",
+            "Public sales Telegram: t.me/modme_sales.",
+            "Public email in the resources pages: [email protected]."
+          ],
+          "source_title": "Modme contacts and resources pages",
+          "source_url": "https://modme.uz/contacts/"
+        },
+        {
+          "id": "modme-support",
+          "topic": "support",
+          "title": "Modme support pack",
+          "summary": "Official support and help-center channels.",
+          "details": [
+            "The help center publicly offers video lessons.",
+            "The help center links to Modme documentation.",
+            "The help center links directly to Modme Support on Telegram.",
+            "The technical support policy says support is provided within the paid tariff plan.",
+            "The public technical support policy lists official support channels as Telegram, phone, and email."
+          ],
+          "source_title": "Modme support center and SLA",
+          "source_url": "https://modme.uz/support/"
+        },
+        {
+          "id": "modme-demo",
+          "topic": "demo",
+          "title": "Modme demo pack",
+          "summary": "Official trial and demo signals.",
+          "details": [
+            "The homepage publicly advertises a 7-day free trial.",
+            "The contacts page includes a demo request path.",
+            "The support and homepage flow are aimed at education centers rather than consumers."
+          ],
+          "source_title": "Modme homepage and contacts",
+          "source_url": "https://modme.uz/"
+        },
+        {
+          "id": "modme-pricing",
+          "topic": "pricing",
+          "title": "Modme pricing pack",
+          "summary": "Official public tariff ranges and gamification module signal.",
+          "details": [
+            "Start: 0-100 students.",
+            "Basic: 100-300 students.",
+            "Pro: 300-1000 students.",
+            "Premium: 1000+ students.",
+            "9-month tariff includes +1 bonus month.",
+            "12-month tariff includes +2 bonus months.",
+            "Gamification module is publicly listed at 150,000 so'm per month."
+          ],
+          "source_title": "Modme prices page",
+          "source_url": "https://modme.uz/prices/"
+        }
+      ]
+    }
+  ]
+}

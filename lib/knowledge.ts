@@ -384,7 +384,7 @@ function isFollowUpQuery(text: string) {
 }
 
 function inferResponseMode(query: string, matchedEntitiesCount: number): ResponseMode {
-  if (/(phone|phone number|contact|contacts|address|location|where is|how can i contact|telefon|telefon raqam|raqam|aloqa|bog'lan|manzil|metro|qabul|admission|admissions|apply|application)/i.test(query)) {
+  if (/(phone|phone number|contact|contacts|address|location|where is|how can i contact|telefon|telefon raqam|raqam|aloqa|bog'lan|manzil|metro|qabul|admission|admissions|apply|application|tuition|fee|fees|price|pricing|payment|discount|chegirma|to'lov|tolov)/i.test(query)) {
     return 'logistics'
   }
 
@@ -876,7 +876,7 @@ function scoreEntityLine(query: string, responseMode: ResponseMode, line: string
 
   if (
     responseMode === 'logistics' &&
-    /(phone|contact|address|location|telefon|raqam|aloqa|manzil|metro|admission|qabul|apply|consultation)/i.test(line)
+    /(phone|contact|address|location|telefon|raqam|aloqa|manzil|metro|admission|qabul|apply|consultation|tuition|fee|fees|price|pricing|payment|discount|chegirma|to'lov)/i.test(line)
   ) {
     score += 5
   }

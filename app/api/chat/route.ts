@@ -131,6 +131,7 @@ function buildResponseContract(
           "Customer support uslubida yozmang. 'Agar xohlasangiz yana aytaman' kabi sun'iy yakunlardan qoching.",
           "Foydalanuvchi so'ramasa, saytga kirishni yoki qo'shimcha ma'lumot olishni tavsiya qilmang.",
           "Agar tanlangan rasmiy manbada telefon, manzil yoki aloqa ma'lumoti ochiq berilgan bo'lsa, uni bevosita ayting. Bunday holatda 'bera olmayman' deb yozmang.",
+          "Agar foydalanuvchi narx, tuition yoki fee so'rasa va tanlangan rasmiy manbada aniq summa bo'lmasa, aniq summa public ko'rsatilmaganini ayting va faqat public payment structure yoki chegirma signalini tilga oling.",
           "Agar fikr yoki yondashuv public manbada aniq ko'rinib turgan bo'lsa, 'mening fikrimcha' deb yumshatmang, bevosita ayting.",
           "Hech qachon 'Sizning Telegram postlaringiz' yoki 'Jahongir ...' deb tashqaridan gapirmang. 'Telegram postlarimda men ...' deb yozing.",
         ]
@@ -145,6 +146,7 @@ function buildResponseContract(
           "Do not sound like customer support. Avoid generic closers such as 'let me know if you want more details'.",
           "Do not tell the user to visit a website unless they explicitly asked for logistics or source links.",
           'If the selected official source contains a public phone number, address, or contact detail, give it directly instead of refusing.',
+          'If the user asks for tuition or price and the selected official sources do not contain an exact amount, say the exact public amount is not listed and only mention the public payment structure or dated discount signal.',
           "If the viewpoint is clearly grounded in the selected public sources, say it directly instead of softening it with 'in my opinion'.",
           "Never write from the outside with phrasing like 'your Telegram posts' or 'Jahongir focuses on'. Say 'in my Telegram posts' or 'I focus on' instead.",
         ]
@@ -166,7 +168,7 @@ function buildResponseContract(
       ? retrieval.responseMode === 'entity'
         ? "Entity savollarida: bu nima, qanday ishlaydi, nimasi bilan farq qiladi degan tartibda javob bering."
         : retrieval.responseMode === 'logistics'
-          ? "Logistika savollarida: telefon, manzil, filial, admission yoki aloqa ma'lumotini birinchi gapning o'zida aniq bering. Faqat tanlangan rasmiy manbada bor narsani ayting."
+          ? "Logistika savollarida: telefon, manzil, filial, admission, payment yoki aloqa ma'lumotini birinchi gapning o'zida aniq bering. Faqat tanlangan rasmiy manbada bor narsani ayting. Aniq fee public bo'lmasa, shuni ochiq ayting."
         : retrieval.responseMode === 'theme_summary'
           ? "Theme-summary savollarida: 3-6 ta eng ko'p qaytadigan mavzuni bevosita ayting, keyin bitta qisqa amaliy izoh qo'shing. Keraksiz umumlashtirmang."
           : retrieval.responseMode === 'ecosystem'
@@ -181,7 +183,7 @@ function buildResponseContract(
       : retrieval.responseMode === 'entity'
         ? 'For entity questions: answer in the order of what it is, how it works, and what makes it different.'
         : retrieval.responseMode === 'logistics'
-          ? 'For logistics questions: give the phone number, address, branch, admission, or contact detail in the first sentence. Only state details that appear in the selected official source.'
+          ? 'For logistics questions: give the phone number, address, branch, admission, payment, or contact detail in the first sentence. Only state details that appear in the selected official source. If the exact fee is not public, say so clearly.'
         : retrieval.responseMode === 'theme_summary'
           ? 'For theme-summary questions: name the 3-6 strongest recurring themes directly, then add one short practical explanation. Do not drift into generic reflection.'
           : retrieval.responseMode === 'ecosystem'

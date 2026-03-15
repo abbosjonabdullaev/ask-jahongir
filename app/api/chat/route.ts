@@ -1,19 +1,20 @@
 import { NextRequest, NextResponse } from 'next/server'
-import OpenAI from 'openai'
 import { jahongirProfile, systemPromptByLocale } from '@/lib/jahongirProfile'
 import { buildKnowledgeContext } from '@/lib/knowledge'
 import { appendReview } from '@/lib/reviewStore'
+import {
+  createChatClient,
+  getChatCredentialName,
+  isChatProviderConfigured,
+  resolveChatModel,
+  resolveChatProvider,
+} from '@/lib/chatProvider'
 
 type Message = {
   role: 'user' | 'assistant'
   content: string
 }
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
-
-const chatModel = process.env.JAHONGIR_CHAT_MODEL ?? 'gpt-4.1-mini'
 const replyMaxTokens = Number(process.env.JAHONGIR_REPLY_MAX_TOKENS ?? '420')
 
 function buildResponseContract(
@@ -121,12 +122,17 @@ export async function POST(request: NextRequest) {
     | undefined
 
   try {
-    if (!process.env.OPENAI_API_KEY) {
+    const chatProvider = resolveChatProvider()
+    const chatModel = resolveChatModel(chatProvider)
+
+    if (!isChatProviderConfigured(chatProvider)) {
       return NextResponse.json(
-        { error: 'Missing OPENAI_API_KEY in environment.' },
+        { error: `Missing ${getChatCredentialName(chatProvider)} in environment.` },
         { status: 500 }
       )
     }
+
+    const client = createChatClient(chatProvider)
 
     body = (await request.json()) as {
       locale?: 'en' | 'uz'
@@ -208,13 +214,16 @@ export async function POST(request: NextRequest) {
       reply,
       matchedEntities: retrieval.matchedEntities,
       sources: retrieval.sources,
+      provider: chatProvider,
     })
   } catch (error) {
     const message =
       error instanceof Error ? error.message : 'Unknown server error.'
 
     const isUpstreamAvailabilityIssue =
-      /429|account is not active|billing|quota|rate limit/i.test(message)
+      /429|503|account is not active|billing|quota|rate limit|resource_exhausted|temporarily unavailable/i.test(
+        message
+      )
 
     if (isUpstreamAvailabilityIssue) {
       const locale = body?.locale === 'uz' ? 'uz' : 'en'
@@ -238,6 +247,7 @@ export async function POST(request: NextRequest) {
         matchedEntities: retrieval.matchedEntities,
         sources: retrieval.sources,
         fallback: true,
+        provider: 'fallback',
       })
     }
 

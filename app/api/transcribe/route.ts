@@ -5,6 +5,9 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
+const transcribeModel =
+  process.env.JAHONGIR_TRANSCRIBE_MODEL ?? 'gpt-4o-mini-transcribe'
+
 export async function POST(request: NextRequest) {
   try {
     if (!process.env.OPENAI_API_KEY) {
@@ -21,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     const transcription = await client.audio.transcriptions.create({
       file: audio,
-      model: 'gpt-4o-transcribe',
+      model: transcribeModel,
       prompt:
         locale === 'uz'
           ? "This audio is likely in Uzbek. Return a clean, natural Uzbek transcript using Uzbek Latin where appropriate."

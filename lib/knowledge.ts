@@ -263,7 +263,7 @@ function sourcePriority(source: SourceLink) {
 function prioritizeSources(sources: SourceLink[]) {
   return uniqueSources(sources)
     .sort((left, right) => sourcePriority(right) - sourcePriority(left))
-    .slice(0, 10)
+    .slice(0, 6)
 }
 
 function isWeakCrossTopicSource(source: SourceLink, matchedEntities: string[], responseMode: ResponseMode) {
@@ -767,24 +767,24 @@ function renderEntitySection(entity: KnowledgeEntity, sources: SourceLink[]) {
     `Type: ${entity.type}`,
     `Relation: ${entity.relation_to_jahongir}`,
     'High-signal facts:',
-    ...entity.facts.map((fact) => `- ${fact}`),
+    ...entity.facts.slice(0, 4).map((fact) => `- ${fact}`),
   ]
 
   if (entity.faq_like_details?.length) {
     lines.push('FAQ-like details:')
-    lines.push(...entity.faq_like_details.map((fact) => `- ${fact}`))
+    lines.push(...entity.faq_like_details.slice(0, 2).map((fact) => `- ${fact}`))
   }
 
   if (entity.admissions_and_operations?.length) {
     lines.push('Admissions and operations:')
-    lines.push(...entity.admissions_and_operations.map((fact) => `- ${fact}`))
+    lines.push(...entity.admissions_and_operations.slice(0, 3).map((fact) => `- ${fact}`))
   }
 
   return lines.join('\n')
 }
 
 function renderTelegramSection(post: TelegramPost, sources: SourceLink[]) {
-  const excerpt = post.text.length > 480 ? `${post.text.slice(0, 480)}...` : post.text
+  const excerpt = post.text.length > 220 ? `${post.text.slice(0, 220)}...` : post.text
   sources.push({
     title: `Telegram post #${post.post_id}`,
     url: post.url,
@@ -830,12 +830,13 @@ function renderLongformSection(item: LongformItem, sources: SourceLink[]) {
     `Topics: ${item.topics.join(', ')}`,
     `Summary: ${item.summary}`,
     'Relevant segments:',
-    ...item.segments.map((segment) => `- ${segment}`),
+    ...item.segments.slice(0, 3).map((segment) => `- ${segment}`),
     `Source: ${item.source_url}`,
   ].join('\n')
 }
 
 function renderTranscriptSection(item: TranscriptSnippet, sources: SourceLink[]) {
+  const excerpt = item.excerpt.length > 220 ? `${item.excerpt.slice(0, 220)}...` : item.excerpt
   sources.push({
     title: item.title,
     url: item.source_file,
@@ -846,12 +847,14 @@ function renderTranscriptSection(item: TranscriptSnippet, sources: SourceLink[])
     `Local transcript source: ${item.title}`,
     `Topics: ${item.topics.join(', ')}`,
     `Summary: ${item.summary}`,
-    `Excerpt: ${item.excerpt}`,
+    `Excerpt: ${excerpt}`,
     `Source file: ${item.source_file}`,
   ].join('\n')
 }
 
 function renderVoiceBankSection(entry: VoiceBankEntry, sources: SourceLink[]) {
+  const anchorText =
+    entry.anchor_text.length > 220 ? `${entry.anchor_text.slice(0, 220)}...` : entry.anchor_text
   sources.push({
     title: entry.source_title,
     url: entry.source_url,
@@ -863,12 +866,14 @@ function renderVoiceBankSection(entry: VoiceBankEntry, sources: SourceLink[]) {
     `Topics: ${entry.topics.join(', ')}`,
     `Voice traits: ${entry.voice_traits.join(', ')}`,
     `Guidance: ${entry.guidance}`,
-    `Anchor text: ${entry.anchor_text}`,
+    `Anchor text: ${anchorText}`,
     `Source: ${entry.source_url}`,
   ].join('\n')
 }
 
 function renderVoiceSetSection(item: VoiceSetItem, sources: SourceLink[]) {
+  const anchorText =
+    item.anchor_text.length > 220 ? `${item.anchor_text.slice(0, 220)}...` : item.anchor_text
   sources.push({
     title: item.source_title,
     url: item.source_url,
@@ -881,12 +886,13 @@ function renderVoiceSetSection(item: VoiceSetItem, sources: SourceLink[]) {
     `Topics: ${item.topics.join(', ')}`,
     `Voice traits: ${item.voice_traits.join(', ')}`,
     `Guidance: ${item.guidance}`,
-    `Anchor text: ${item.anchor_text}`,
+    `Anchor text: ${anchorText}`,
     `Source: ${item.source_url}`,
   ].join('\n')
 }
 
 function renderYouTubeSection(item: YouTubeSnippet, sources: SourceLink[]) {
+  const excerpt = item.excerpt.length > 220 ? `${item.excerpt.slice(0, 220)}...` : item.excerpt
   sources.push({
     title: item.title,
     url: item.source_url,
@@ -898,9 +904,9 @@ function renderYouTubeSection(item: YouTubeSnippet, sources: SourceLink[]) {
     `Type: ${item.source_type}`,
     `Topics: ${item.topics.join(', ')}`,
     `Summary: ${item.summary}`,
-    `Excerpt: ${item.excerpt}`,
+    `Excerpt: ${excerpt}`,
     'Relevant segments:',
-    ...item.segments.map((segment) => `- ${segment}`),
+    ...item.segments.slice(0, 2).map((segment) => `- ${segment}`),
     `Source: ${item.source_url}`,
   ].join('\n')
 }
@@ -922,6 +928,7 @@ function renderYouTubeCuratedSection(item: YouTubeCuratedInsight, sources: Sourc
 }
 
 function renderYouTubeTranscriptSection(item: YouTubeTranscriptSnippet, sources: SourceLink[]) {
+  const excerpt = item.excerpt.length > 220 ? `${item.excerpt.slice(0, 220)}...` : item.excerpt
   sources.push({
     title: item.title,
     url: item.source_url,
@@ -933,7 +940,7 @@ function renderYouTubeTranscriptSection(item: YouTubeTranscriptSnippet, sources:
     `Type: ${item.source_type}`,
     `Topics: ${item.topics.join(', ')}`,
     `Summary: ${item.summary}`,
-    `Excerpt: ${item.excerpt}`,
+    `Excerpt: ${excerpt}`,
     `Source file: ${item.source_file}`,
     `Source: ${item.source_url}`,
   ].join('\n')
@@ -956,61 +963,61 @@ export function buildKnowledgeContext(messages: Array<{ role: 'user' | 'assistan
     }))
     .filter((item) => item.score >= 4)
     .sort((left, right) => right.score - left.score)
-    .slice(0, 2)
+    .slice(0, 1)
 
   const rankedPosts = telegram.posts
     .map((post) => ({ post, score: scorePost(query, post) }))
     .filter((item) => item.score > 0)
     .sort((left, right) => right.score - left.score)
-    .slice(0, 2)
+    .slice(0, 1)
 
   const rankedSnippets = publicSnippets.snippets
     .map((snippet) => ({ snippet, score: scoreSnippet(query, snippet) }))
     .filter((item) => item.score >= 4)
     .sort((left, right) => right.score - left.score)
-    .slice(0, 2)
+    .slice(0, 1)
 
   const rankedLongform = longform.items
     .map((item) => ({ item, score: scoreLongform(query, item) }))
     .filter((entry) => entry.score >= 4)
     .sort((left, right) => right.score - left.score)
-    .slice(0, 2)
+    .slice(0, 1)
 
   const rankedTranscriptSnippets = transcriptSnippets.items
     .map((item) => ({ item, score: scoreTranscriptSnippet(query, item) }))
     .filter((entry) => entry.score >= 4)
     .sort((left, right) => right.score - left.score)
-    .slice(0, 2)
+    .slice(0, 1)
 
   const rankedVoiceBank = voiceBank.entries
     .map((entry) => ({ entry, score: scoreVoiceBankEntry(query, entry) }))
     .filter((item) => item.score >= 5)
     .sort((left, right) => right.score - left.score)
-    .slice(0, 2)
+    .slice(0, 1)
 
   const rankedVoiceSet = voiceSet.items
     .map((item) => ({ item, score: scoreVoiceSetItem(query, item) }))
     .filter((entry) => entry.score >= 6)
     .sort((left, right) => right.score - left.score)
-    .slice(0, 3)
+    .slice(0, 2)
 
   const rankedYouTubeCurated = youtubeCuratedInsights.items
     .map((item) => ({ item, score: scoreYouTubeCuratedInsight(query, item) }))
     .filter((entry) => entry.score >= 5)
     .sort((left, right) => right.score - left.score)
-    .slice(0, 3)
+    .slice(0, 1)
 
   const rankedYouTube = youtubeSnippets.items
     .map((item) => ({ item, score: scoreYouTubeSnippet(query, item) }))
     .filter((entry) => entry.score > 0)
     .sort((left, right) => right.score - left.score)
-    .slice(0, 2)
+    .slice(0, 1)
 
   const rankedYouTubeTranscripts = youtubeTranscriptSnippets.items
     .map((item) => ({ item, score: scoreYouTubeTranscriptSnippet(query, item) }))
     .filter((entry) => entry.score >= 6)
     .sort((left, right) => right.score - left.score)
-    .slice(0, 2)
+    .slice(0, 1)
 
   const sources: SourceLink[] = []
   const sections: string[] = []
@@ -1020,7 +1027,7 @@ export function buildKnowledgeContext(messages: Array<{ role: 'user' | 'assistan
     ...rankedVoiceBank.flatMap(({ entry }) => entry.voice_traits),
     ...rankedSnippets.map(({ snippet }) => snippet.style_signal),
     ...rankedYouTubeCurated.map(({ item }) => item.style_signal),
-  ]
+  ].filter(Boolean).slice(0, 5)
 
   if (rankedEntities.length > 0) {
     sections.push(

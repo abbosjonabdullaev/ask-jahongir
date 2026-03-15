@@ -10,7 +10,7 @@ Jahongir Pulatov AI clone built with Next.js, grounded in public-source data fro
 ## Live
 
 - Demo: <https://askjahongirpulatov.netlify.app>
-- GitHub: <https://github.com/AkbarDevop/ask-jahongir>
+- GitHub: <https://github.com/abbosjonabdullaev/ask-jahongir>
 
 ## What It Does
 
@@ -42,6 +42,15 @@ Main knowledge files live in [`data/`](./data).
 - OpenAI for chat and transcription
 - ElevenLabs for custom voice playback
 - Netlify for deployment
+
+## Cost Defaults
+
+The app is configured to favor cheaper grounded answers by default:
+
+- `JAHONGIR_CHAT_MODEL=gpt-4.1-mini`
+- `JAHONGIR_TRANSCRIBE_MODEL=gpt-4o-mini-transcribe`
+- reduced prompt size and fewer retrieved context blocks
+- capped answer length with `JAHONGIR_REPLY_MAX_TOKENS=420`
 
 ## Local Setup
 

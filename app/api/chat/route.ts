@@ -13,7 +13,8 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 })
 
-const chatModel = process.env.JAHONGIR_CHAT_MODEL ?? 'gpt-4o'
+const chatModel = process.env.JAHONGIR_CHAT_MODEL ?? 'gpt-4.1-mini'
+const replyMaxTokens = Number(process.env.JAHONGIR_REPLY_MAX_TOKENS ?? '420')
 
 function buildResponseContract(
   locale: 'en' | 'uz',
@@ -133,7 +134,7 @@ export async function POST(request: NextRequest) {
     }
 
     const locale = body.locale === 'uz' ? 'uz' : 'en'
-    const messages = Array.isArray(body.messages) ? body.messages.slice(-8) : []
+    const messages = Array.isArray(body.messages) ? body.messages.slice(-6) : []
 
     if (messages.length === 0) {
       return NextResponse.json(
@@ -147,6 +148,7 @@ export async function POST(request: NextRequest) {
     const completion = await client.chat.completions.create({
       model: chatModel,
       temperature: 0.35,
+      max_tokens: replyMaxTokens,
       messages: [
         {
           role: 'system',

@@ -62,6 +62,37 @@ function normalizeFirstPersonReply(reply: string, locale: 'en' | 'uz') {
   return normalized
 }
 
+function trimGenericClosing(
+  reply: string,
+  mode: ReturnType<typeof buildKnowledgeContext>['responseMode'],
+  locale: 'en' | 'uz'
+) {
+  if (mode !== 'theme_summary') {
+    return reply
+  }
+
+  const parts = reply
+    .split(/(?<=[.!?])\s+/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+
+  if (parts.length < 2) {
+    return reply
+  }
+
+  const lastPart = parts.at(-1) ?? ''
+  const genericThemeClosing =
+    locale === 'uz'
+      ? /^(Umuman|Bu mavzular|Maqsadim|Asosiy maqsadim)/i
+      : /^(Overall|These themes|This reflects|My aim is|The overall idea)/i
+
+  if (!genericThemeClosing.test(lastPart)) {
+    return reply
+  }
+
+  return parts.slice(0, -1).join(' ')
+}
+
 function buildResponseContract(
   locale: 'en' | 'uz',
   retrieval: ReturnType<typeof buildKnowledgeContext>
@@ -126,7 +157,7 @@ function buildResponseContract(
         : retrieval.responseMode === 'theme_summary'
           ? "Theme-summary savollarida: 3-6 ta eng ko'p qaytadigan mavzuni bevosita ayting, keyin bitta qisqa amaliy izoh qo'shing. Keraksiz umumlashtirmang."
           : retrieval.responseMode === 'ecosystem'
-            ? "Ecosystem savollarida: menga eng aniq bog'langan loyihalarni avval ayting, keyin kerak bo'lsa rasmiyligi pastroq bog'lanishlarni alohida ehtiyotkorlik bilan ajrating."
+            ? "Ecosystem savollarida: menga eng aniq bog'langan loyihalarni avval ayting, keyin kerak bo'lsa rasmiyligi pastroq bog'lanishlarni alohida ehtiyotkorlik bilan ajrating. Tanlangan kontekstdan tashqari ortiqcha brand qo'shmang."
         : retrieval.responseMode === 'latest'
           ? "Latest savollarida: to'g'ridan-to'g'ri eng so'nggi public signalni ayting va kerak bo'lsa sanani qo'shing."
           : retrieval.responseMode === 'founder_story'
@@ -139,7 +170,7 @@ function buildResponseContract(
         : retrieval.responseMode === 'theme_summary'
           ? 'For theme-summary questions: name the 3-6 strongest recurring themes directly, then add one short practical explanation. Do not drift into generic reflection.'
           : retrieval.responseMode === 'ecosystem'
-            ? 'For ecosystem questions: list the projects most clearly tied to me first, then separate thinner or more secondary public associations carefully.'
+            ? 'For ecosystem questions: list the projects most clearly tied to me first, then separate thinner or more secondary public associations carefully. Do not add extra brands beyond the selected context.'
         : retrieval.responseMode === 'latest'
           ? 'For latest questions: give the latest public signal directly and include the date when useful.'
           : retrieval.responseMode === 'founder_story'
@@ -257,7 +288,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const normalizedReply = normalizeFirstPersonReply(reply, locale)
+    const normalizedReply = trimGenericClosing(
+      normalizeFirstPersonReply(reply, locale),
+      retrieval.responseMode,
+      locale
+    )
 
     const question = messages.filter((message) => message.role === 'user').at(-1)?.content ?? ''
 

@@ -269,6 +269,19 @@ function prioritizeSources(sources: SourceLink[]) {
 }
 
 function isWeakCrossTopicSource(source: SourceLink, matchedEntities: string[], responseMode: ResponseMode) {
+  if (responseMode === 'ecosystem') {
+    if (
+      source.kind === 'youtube_curated' ||
+      source.kind === 'youtube' ||
+      source.kind === 'youtube_transcript' ||
+      source.kind === 'longform' ||
+      source.kind === 'voice_bank' ||
+      source.kind === 'local_transcript'
+    ) {
+      return true
+    }
+  }
+
   if (matchedEntities.includes('Jahon School')) {
     if (
       source.kind === 'youtube_curated' &&
@@ -494,6 +507,13 @@ function scoreSnippet(query: string, snippet: PublicSnippet) {
   if (
     snippet.type === 'aggregate_signal' &&
     /(what themes|which themes|telegram posts|telegram content|what do you post about|content themes|mavzu|mavzular|nimalar ko'p uchraydi|nimani ko'p yozasiz|postlarimda)/i.test(query)
+  ) {
+    score += 8
+  }
+
+  if (
+    snippet.type === 'aggregate_signal' &&
+    /(what businesses|what projects|your businesses|your projects|business ecosystem|project ecosystem|qanday loyihalar|qaysi loyihalar|qanday bizneslar|qaysi bizneslar|nima bizneslaringiz bor|ekotizim)/i.test(query)
   ) {
     score += 8
   }

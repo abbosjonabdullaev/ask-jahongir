@@ -370,6 +370,15 @@
       "style_signal": "operator-first, product-specific, practical",
       "source_title": "Modme official gamification page",
       "source_url": "https://modme.uz/gamification/"
+    },
+    {
+      "id": "official-education-ecosystem-summary",
+      "type": "aggregate_signal",
+      "topics": ["businesses", "projects", "ecosystem", "cambridge", "jahon_school", "modme", "cambridge_kidzzz"],
+      "summary": "The clearest official education ecosystem publicly tied to Jahongir through the Jahon School about page includes Cambridge Learning Center, Jahon School, Modme, and Cambridge Kidzzz. This is the most source-backed project stack before moving to thinner secondary associations.",
+      "style_signal": "clear, source-ranked, evidence-first",
+      "source_title": "Jahon School official education ecosystem summary",
+      "source_url": "https://jahonschool.uz/aboutus"
     }
   ]
 }

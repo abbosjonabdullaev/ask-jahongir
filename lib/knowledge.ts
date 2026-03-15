@@ -190,6 +190,7 @@ export type SourceLink = {
 
 export type ResponseMode =
   | 'entity'
+  | 'logistics'
   | 'theme_summary'
   | 'ecosystem'
   | 'advice'
@@ -210,7 +211,11 @@ const youtubeSnippets = youtubeSnippetsData as YouTubeSnippetsData
 const youtubeTranscriptSnippets = youtubeTranscriptSnippetsData as YouTubeTranscriptSnippetsData
 
 function normalize(text: string) {
-  return text.toLowerCase()
+  return text
+    .toLowerCase()
+    .replace(/cambeidge/g, 'cambridge')
+    .replace(/cambidge/g, 'cambridge')
+    .replace(/polatov/g, "po'latov")
 }
 
 function tokenize(text: string) {
@@ -296,6 +301,21 @@ function isWeakCrossTopicSource(source: SourceLink, matchedEntities: string[], r
     }
   }
 
+  if (responseMode === 'logistics') {
+    if (
+      source.kind === 'voice_set' ||
+      source.kind === 'voice_bank' ||
+      source.kind === 'youtube_curated' ||
+      source.kind === 'youtube' ||
+      source.kind === 'youtube_transcript' ||
+      source.kind === 'longform' ||
+      source.kind === 'local_transcript' ||
+      source.kind === 'telegram_post'
+    ) {
+      return true
+    }
+  }
+
   if (matchedEntities.includes('Jahon School')) {
     if (
       source.kind === 'youtube_curated' &&
@@ -364,6 +384,10 @@ function isFollowUpQuery(text: string) {
 }
 
 function inferResponseMode(query: string, matchedEntitiesCount: number): ResponseMode {
+  if (/(phone|phone number|contact|contacts|address|location|where is|how can i contact|telefon|telefon raqam|raqam|aloqa|bog'lan|manzil|metro|qabul|admission|admissions|apply|application)/i.test(query)) {
+    return 'logistics'
+  }
+
   if (/(what themes|which themes|telegram posts|telegram content|what do you post about|content themes|mavzu|mavzular|nimalar ko'p uchraydi|nimani ko'p yozasiz|postlarimda)/i.test(query)) {
     return 'theme_summary'
   }
@@ -398,21 +422,21 @@ function inferResponseMode(query: string, matchedEntitiesCount: number): Respons
 function entityKeywordBoost(entity: KnowledgeEntity, query: string) {
   if (
     entity.type.includes('school') &&
-    /(school|maktab|admission|admissions|apply|tuition|fee|uniform|dorm|parent|skilldev|app|apps|student app|parent app|o'quvchi|ota-ona|grades|homework|timetable)/i.test(query)
+    /(school|maktab|admission|admissions|apply|application|tuition|fee|uniform|dorm|parent|skilldev|app|apps|student app|parent app|o'quvchi|ota-ona|grades|homework|timetable|phone|contact|address|location|telefon|aloqa|manzil|metro)/i.test(query)
   ) {
     return 3
   }
 
   if (
     entity.name === 'Modme' &&
-    /(crm|lms|software|platform|automation|edtech|edu ?tech|lead|report|payment|finance|demo|support|pricing|price|gamification|vacancy|sales|b2b)/i.test(query)
+    /(crm|lms|software|platform|automation|edtech|edu ?tech|lead|report|payment|finance|demo|support|pricing|price|gamification|vacancy|sales|b2b|phone|contact|address|telefon|aloqa|manzil)/i.test(query)
   ) {
     return 4
   }
 
   if (
     entity.name === 'Cambridge Learning Center' &&
-    /(ielts|english|branch|branches|certificate|cambridge|teacher|student|learning center|app|hybrid|cashback|coin|reward|movie day|speaking club)/i.test(query)
+    /(ielts|english|branch|branches|certificate|cambridge|teacher|student|learning center|app|hybrid|cashback|coin|reward|movie day|speaking club|phone|contact|address|telefon|aloqa|manzil)/i.test(query)
   ) {
     return 4
   }
@@ -840,7 +864,63 @@ function scoreYouTubeTranscriptSnippet(query: string, item: YouTubeTranscriptSni
   return score
 }
 
-function renderEntitySection(entity: KnowledgeEntity, sources: SourceLink[]) {
+function scoreEntityLine(query: string, responseMode: ResponseMode, line: string) {
+  const haystack = normalize(line)
+  let score = 0
+
+  for (const token of tokenize(query)) {
+    if (haystack.includes(token)) {
+      score += 1
+    }
+  }
+
+  if (
+    responseMode === 'logistics' &&
+    /(phone|contact|address|location|telefon|raqam|aloqa|manzil|metro|admission|qabul|apply|consultation)/i.test(line)
+  ) {
+    score += 5
+  }
+
+  if (
+    responseMode === 'entity' &&
+    /(app|program|price|pricing|payment|ielts|english|teacher|student|branch|result|skilldev|lms|crm)/i.test(line)
+  ) {
+    score += 2
+  }
+
+  return score
+}
+
+function pickRelevantEntityLines(query: string, responseMode: ResponseMode, lines: string[] | undefined, limit: number) {
+  if (!lines?.length) {
+    return []
+  }
+
+  const ranked = lines
+    .map((line, index) => ({
+      line,
+      index,
+      score: scoreEntityLine(query, responseMode, line),
+    }))
+    .sort((left, right) => {
+      if (right.score !== left.score) {
+        return right.score - left.score
+      }
+
+      return left.index - right.index
+    })
+
+  const selected = ranked.some((item) => item.score > 0) ? ranked.slice(0, limit) : ranked.slice(0, limit)
+
+  return selected.map((item) => item.line)
+}
+
+function renderEntitySection(
+  entity: KnowledgeEntity,
+  sources: SourceLink[],
+  query: string,
+  responseMode: ResponseMode
+) {
   entity.sources.forEach((source) => {
     sources.push({
       title: entity.name,
@@ -854,17 +934,33 @@ function renderEntitySection(entity: KnowledgeEntity, sources: SourceLink[]) {
     `Type: ${entity.type}`,
     `Relation: ${entity.relation_to_jahongir}`,
     'High-signal facts:',
-    ...entity.facts.slice(0, 4).map((fact) => `- ${fact}`),
+    ...pickRelevantEntityLines(query, responseMode, entity.facts, responseMode === 'logistics' ? 5 : 4).map(
+      (fact) => `- ${fact}`
+    ),
   ]
 
-  if (entity.faq_like_details?.length) {
+  const selectedFaqDetails = pickRelevantEntityLines(
+    query,
+    responseMode,
+    entity.faq_like_details,
+    responseMode === 'logistics' ? 3 : 2
+  )
+
+  if (selectedFaqDetails.length) {
     lines.push('FAQ-like details:')
-    lines.push(...entity.faq_like_details.slice(0, 2).map((fact) => `- ${fact}`))
+    lines.push(...selectedFaqDetails.map((fact) => `- ${fact}`))
   }
 
-  if (entity.admissions_and_operations?.length) {
+  const selectedOperations = pickRelevantEntityLines(
+    query,
+    responseMode,
+    entity.admissions_and_operations,
+    responseMode === 'logistics' ? 4 : 3
+  )
+
+  if (selectedOperations.length) {
     lines.push('Admissions and operations:')
-    lines.push(...entity.admissions_and_operations.slice(0, 3).map((fact) => `- ${fact}`))
+    lines.push(...selectedOperations.map((fact) => `- ${fact}`))
   }
 
   return lines.join('\n')
@@ -1106,6 +1202,7 @@ export function buildKnowledgeContext(messages: Array<{ role: 'user' | 'assistan
     .sort((left, right) => right.score - left.score)
     .slice(0, 1)
 
+  const responseMode = inferResponseMode(currentQuery || query, rankedEntities.length)
   const sources: SourceLink[] = []
   const sections: string[] = []
   const includeYouTubeOutline = /(youtube|video|kanal|channel|short|shorts)/i.test(query)
@@ -1120,7 +1217,7 @@ export function buildKnowledgeContext(messages: Array<{ role: 'user' | 'assistan
     sections.push(
       [
         'Selected organization context:',
-        ...rankedEntities.map(({ entity }) => renderEntitySection(entity, sources)),
+        ...rankedEntities.map(({ entity }) => renderEntitySection(entity, sources, currentQuery || query, responseMode)),
       ].join('\n\n')
     )
   }
@@ -1217,8 +1314,6 @@ export function buildKnowledgeContext(messages: Array<{ role: 'user' | 'assistan
   if (styleSignals.length > 0) {
     sections.push(`Preferred answer style cues for this question: ${styleSignals.join('; ')}.`)
   }
-
-  const responseMode = inferResponseMode(currentQuery || query, rankedEntities.length)
 
   return {
     context: sections.join('\n\n'),

@@ -6,7 +6,7 @@
       "name": "Cambridge Learning Center",
       "type": "education_center",
       "relation_to_jahongir": "Founder-linked organization repeatedly associated with Jahongir Pulatov in public sources",
-      "aliases": ["cambridge", "cambridge lc", "cambridge learning", "cambridge online"],
+      "aliases": ["cambridge", "cambridge lc", "cambridge learning", "cambridge online", "cambeidge", "cambeidge lc", "cambridge learning centre"],
       "facts": [
         "According to the official site, it has operated since 2014.",
         "According to the official English landing page, it presents itself as having 11+ years of experience as of March 2026.",
@@ -19,6 +19,9 @@
         "According to the official site, its certificates are recognized by 15+ companies and 10+ universities.",
         "According to the official Cambridge Students' app page, the center positions the app as part of a hybrid-learning model with a personal student cabinet.",
         "The official App Store listing says Cambridge Student App lets students earn points, see a leaderboard, and work with online lessons and materials, and the listing is published under developer Jakhongir Pulatov.",
+        "As of March 15, 2026, the official Cambridge site publicly lists the main contact number as +998 78 777 77 74.",
+        "As of March 15, 2026, the official public offer lists the legal entity as CAMBRIDGE GROUP LLC with legal address Tashkent city, Chilonzor district, Olmazor massivi, 6/7, and telephone 78 777 77 74.",
+        "As of March 15, 2026, the official English branch listing publicly shows branches such as Sergeli, Inyaz, Drujba 1, Drujba 2, Darxon, Tinchlik, Yunusobod, Novza, Ferghana, and Samarkand.",
         "A public Telegram post says Cambridge started from three small rooms near Xalqlar do'stligi and was built to give English learners modern conditions and quality education.",
         "A LinkedIn Cambridge job post says the organization publicly presented itself as Brand of the Year 2019-2020 and winner of the HR Brand of 2022 award.",
         "A LinkedIn Cambridge company post says top teachers can earn a special trip to London, which supports the public signal of a strong performance-and-incentive culture."
@@ -30,13 +33,15 @@
         "The English pages describe General English as 5 levels, each lasting 3 months, with classes 3 times per week for 80 minutes.",
         "The English pages highlight Sunday activities like Movie Day, Speaking Club, debates, and seminars with guest speakers.",
         "A cashback condition is advertised for IELTS Level 2 and IELTS Rocket students who score 7.5+ overall and present the certificate.",
-        "Official offer language defines a Cambridge points and Cambridge coin reward system inside the Cambridge Students' app."
+        "Official offer language defines a Cambridge points and Cambridge coin reward system inside the Cambridge Students' app.",
+        "The official registration page says classes are conducted offline in Tashkent, Fergana, and Samarkand."
       ],
       "sources": [
         "https://cambridgeonline.uz/",
         "https://cambridgeonline.uz/faq",
         "https://cambridgeonline.uz/en/landing",
         "https://cambridgeonline.uz/en/",
+        "https://cambridgeonline.uz/en/registration/",
         "https://cambridgeonline.uz/cambridge-app/",
         "https://cambridgeonline.uz/success/",
         "https://cambridgeonline.uz/_nuxt/oferta-uz.VGiG3Cmb.pdf",
@@ -62,7 +67,9 @@
         "According to the official about page, the long-term vision is to spread its authorial program for skills, knowledge, and behavior to all regions of Uzbekistan by 2030.",
         "According to the official about page, the school publicly emphasizes values around innovation, responsibility, belonging, and tolerance.",
         "According to the official about page, the school presents a wider ecosystem with partner signals like Safia, Najot Ta'lim IT clubs, Akfa Medline health support, Turin engineering and robotics exposure, Qamar Books, and Cambridge's English expertise.",
-        "The App Store developer page under Jakhongir Pulatov lists JS O'quvchi and JS Ota-ona, which is a strong public signal that Jahon School also operates its own student and parent app ecosystem."
+        "The App Store developer page under Jakhongir Pulatov lists JS O'quvchi and JS Ota-ona, which is a strong public signal that Jahon School also operates its own student and parent app ecosystem.",
+        "As of March 15, 2026, official Jahon School pages publicly list the main contact number as +998 78 777 07 07.",
+        "As of March 15, 2026, official Jahon School pages publicly list the school location as Tashkent city, Olmazor district, Beruniy street, 83, near Tinchlik metro station."
       ],
       "admissions_and_operations": [
         "Admissions steps listed: school visit, school introduction, parent interview, psychologist interview, measuring academic level, final admission.",
@@ -72,13 +79,16 @@
         "FAQ says uniforms are required.",
         "FAQ says students receive three meals a day.",
         "FAQ says parents get app-based monthly updates on attendance, academic performance, mood, mental state, and health.",
+        "Official pages show a consultation/contact flow for parents who want to learn more before admission.",
         "The JS O'quvchi App Store listing describes timetable, homework, progress, grades, menu, and rewards/shop as core student-app functions."
       ],
       "sources": [
         "https://jahonschool.uz/",
         "https://jahonschool.uz/admissions",
         "https://jahonschool.uz/faqs",
+        "https://jahonschool.uz/aboutus",
         "https://jahonschool.uz/aboutus/dark",
+        "https://jahonschool.uz/vacancy",
         "https://apps.apple.com/cr/developer/jakhongir-pulatov/id1657827937",
         "https://apps.apple.com/cr/app/js-oquvchi/id6748948691"
       ]
@@ -100,7 +110,9 @@
         "Dealroom says Modme later launched a white-labeled mobile application for education centers in 2024.",
         "The official vacancies page shows a sales model focused on presenting Modme CRM to education centers and running B2B sales conversations.",
         "The official resources and offer pages explicitly frame Modme as a service for legal entities and entrepreneurs rather than consumer use.",
-        "As of March 15, 2026, the official prices page publicly lists four tiers: Start for 0-100 students, Basic for 100-300, Pro for 300-1000, and Premium for 1000+ students."
+        "As of March 15, 2026, the official prices page publicly lists four tiers: Start for 0-100 students, Basic for 100-300, Pro for 300-1000, and Premium for 1000+ students.",
+        "As of March 15, 2026, the official contacts and resources pages publicly list Modme's phone number as +998 (78) 777-11-00.",
+        "As of March 15, 2026, the official resources pages publicly list the legal address as Tashkent city, Mirzo-Ulugbek district, Navnihol mahalla, Tepamasjid street, 4A."
       ],
       "faq_like_details": [
         "As of March 15, 2026, the official prices page advertises a 9-month payment bonus of 1 month and a 12-month payment bonus of 2 months.",

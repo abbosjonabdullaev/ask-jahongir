@@ -12,6 +12,8 @@ Jahongir Pulatov AI clone built with Next.js, grounded in public-source data fro
 
 - Demo: <https://askjahongirpulatov.netlify.app>
 - GitHub: <https://github.com/abbosjonabdullaev/ask-jahongir>
+- Changelog: [`CHANGELOG.md`](./CHANGELOG.md)
+- Knowledge sources: [`docs/knowledge-sources.md`](./docs/knowledge-sources.md)
 
 ## What It Does
 
@@ -34,6 +36,21 @@ The app uses layered retrieval rather than a single prompt dump.
 - a higher-priority voice set for style anchoring
 
 Main knowledge files live in [`data/`](./data).
+
+## Project Structure
+
+- `app/`
+  - Next.js App Router pages and API routes
+- `components/`
+  - chat UI, message actions, voice controls, avatar, suggestions
+- `data/`
+  - grounded knowledge layers and curated source files
+- `lib/`
+  - retrieval, persona, provider, review, and utility logic
+- `docs/`
+  - project and source documentation
+- `scripts/`
+  - deployment and data-ingestion helpers
 
 ## Stack
 
@@ -118,3 +135,4 @@ powershell -ExecutionPolicy Bypass -File scripts/deploy-netlify.ps1 -SiteName as
 - The app is grounded in public data, not private information.
 - Voice cloning should only be done with approved audio.
 - If the active chat provider key is missing or invalid, the app can still answer through its local grounded fallback path, but responses will be less natural than live model output.
+- Public-source details can change over time, so the knowledge base should be refreshed periodically.

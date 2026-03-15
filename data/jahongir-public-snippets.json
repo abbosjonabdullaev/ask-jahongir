@@ -415,6 +415,33 @@
       "style_signal": "sales-driven, commercial, operator-first",
       "source_title": "Modme official vacancies page",
       "source_url": "https://modme.uz/vacancies/"
+    },
+    {
+      "id": "cambridge-appstore-student-experience",
+      "type": "official_message",
+      "topics": ["cambridge", "app", "student_experience", "rewards", "hybrid_learning"],
+      "summary": "The official App Store listing says Cambridge Student App lets students earn points, view a leaderboard, and access online lessons and materials, which reinforces Cambridge's public positioning as a hybrid learning system rather than just an offline center.",
+      "style_signal": "modern, student-facing, feature-specific",
+      "source_title": "Cambridge Student App App Store listing",
+      "source_url": "https://apps.apple.com/cr/app/cambridge-student-app/id6444906132"
+    },
+    {
+      "id": "jahon-school-app-ecosystem",
+      "type": "official_message",
+      "topics": ["jahon_school", "apps", "parent_app", "student_app", "operations"],
+      "summary": "The App Store developer page under Jakhongir Pulatov lists JS O'quvchi and JS Ota-ona, and the JS O'quvchi listing describes timetable, homework, progress, grades, menu, and rewards/shop features. This is one of the clearest public signals that Jahon School's app ecosystem is operational, not just marketing language.",
+      "style_signal": "operational, concrete, parent-and-student-facing",
+      "source_title": "Jakhongir Pulatov App Store developer page",
+      "source_url": "https://apps.apple.com/cr/developer/jakhongir-pulatov/id1657827937"
+    },
+    {
+      "id": "modme-legal-b2b-positioning",
+      "type": "official_message",
+      "topics": ["modme", "b2b", "legal", "offer", "operations"],
+      "summary": "Modme's official resources and offer pages explicitly position the service for legal entities and entrepreneurs, which strengthens the public picture of Modme as a formal B2B SaaS product for education businesses.",
+      "style_signal": "formal, commercial, b2b",
+      "source_title": "Modme official resources and offer pages",
+      "source_url": "https://modme.uz/resources/oferta/"
     }
   ]
 }

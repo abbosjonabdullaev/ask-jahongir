@@ -18,6 +18,7 @@
         "According to the Russian landing page, free student activities can include tennis, golf, mafia, cinema, celebrity meetups, and trips.",
         "According to the official site, its certificates are recognized by 15+ companies and 10+ universities.",
         "According to the official Cambridge Students' app page, the center positions the app as part of a hybrid-learning model with a personal student cabinet.",
+        "The official App Store listing says Cambridge Student App lets students earn points, see a leaderboard, and work with online lessons and materials, and the listing is published under developer Jakhongir Pulatov.",
         "A public Telegram post says Cambridge started from three small rooms near Xalqlar do'stligi and was built to give English learners modern conditions and quality education.",
         "A LinkedIn Cambridge job post says the organization publicly presented itself as Brand of the Year 2019-2020 and winner of the HR Brand of 2022 award.",
         "A LinkedIn Cambridge company post says top teachers can earn a special trip to London, which supports the public signal of a strong performance-and-incentive culture."
@@ -60,7 +61,8 @@
         "According to the official founder message, Jahon School sees high-quality education as the main solution to deep social problems.",
         "According to the official about page, the long-term vision is to spread its authorial program for skills, knowledge, and behavior to all regions of Uzbekistan by 2030.",
         "According to the official about page, the school publicly emphasizes values around innovation, responsibility, belonging, and tolerance.",
-        "According to the official about page, the school presents a wider ecosystem with partner signals like Safia, Najot Ta'lim IT clubs, Akfa Medline health support, Turin engineering and robotics exposure, Qamar Books, and Cambridge's English expertise."
+        "According to the official about page, the school presents a wider ecosystem with partner signals like Safia, Najot Ta'lim IT clubs, Akfa Medline health support, Turin engineering and robotics exposure, Qamar Books, and Cambridge's English expertise.",
+        "The App Store developer page under Jakhongir Pulatov lists JS O'quvchi and JS Ota-ona, which is a strong public signal that Jahon School also operates its own student and parent app ecosystem."
       ],
       "admissions_and_operations": [
         "Admissions steps listed: school visit, school introduction, parent interview, psychologist interview, measuring academic level, final admission.",
@@ -69,13 +71,16 @@
         "FAQ says annual fees change at most once per year.",
         "FAQ says uniforms are required.",
         "FAQ says students receive three meals a day.",
-        "FAQ says parents get app-based monthly updates on attendance, academic performance, mood, mental state, and health."
+        "FAQ says parents get app-based monthly updates on attendance, academic performance, mood, mental state, and health.",
+        "The JS O'quvchi App Store listing describes timetable, homework, progress, grades, menu, and rewards/shop as core student-app functions."
       ],
       "sources": [
         "https://jahonschool.uz/",
         "https://jahonschool.uz/admissions",
         "https://jahonschool.uz/faqs",
-        "https://jahonschool.uz/aboutus/dark"
+        "https://jahonschool.uz/aboutus/dark",
+        "https://apps.apple.com/cr/developer/jakhongir-pulatov/id1657827937",
+        "https://apps.apple.com/cr/app/js-oquvchi/id6748948691"
       ]
     },
     {
@@ -94,6 +99,7 @@
         "Dealroom says Modme raised $100,000 from UzVC in February 2023 at a $1.2 million valuation.",
         "Dealroom says Modme later launched a white-labeled mobile application for education centers in 2024.",
         "The official vacancies page shows a sales model focused on presenting Modme CRM to education centers and running B2B sales conversations.",
+        "The official resources and offer pages explicitly frame Modme as a service for legal entities and entrepreneurs rather than consumer use.",
         "As of March 15, 2026, the official prices page publicly lists four tiers: Start for 0-100 students, Basic for 100-300, Pro for 300-1000, and Premium for 1000+ students."
       ],
       "faq_like_details": [
@@ -111,7 +117,8 @@
         "https://modme.uz/support/",
         "https://modme.uz/vacancies/",
         "https://modme.uz/contacts/",
-        "https://modme.uz/resources/oferta/"
+        "https://modme.uz/resources/oferta/",
+        "https://modme.uz/resources/"
       ]
     },
     {

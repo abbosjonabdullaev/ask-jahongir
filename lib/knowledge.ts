@@ -391,7 +391,7 @@ function inferResponseMode(query: string, matchedEntitiesCount: number): Respons
 function entityKeywordBoost(entity: KnowledgeEntity, query: string) {
   if (
     entity.type.includes('school') &&
-    /(school|maktab|admission|admissions|apply|tuition|fee|uniform|dorm|parent|skilldev)/i.test(query)
+    /(school|maktab|admission|admissions|apply|tuition|fee|uniform|dorm|parent|skilldev|app|apps|student app|parent app|o'quvchi|ota-ona|grades|homework|timetable)/i.test(query)
   ) {
     return 3
   }
@@ -543,11 +543,11 @@ function scoreSnippet(query: string, snippet: PublicSnippet) {
     score += 6
   }
 
-  if (/(demo|support|contact|contacts|telegram support|video lesson|documentation|onboarding)/i.test(query) && /demo|support|operations/.test(snippet.topics.join(' '))) {
+  if (/(demo|support|contact|contacts|telegram support|video lesson|documentation|onboarding|legal|legal entity|entrepreneur|b2b|consumer)/i.test(query) && /demo|support|operations|legal|b2b/.test(snippet.topics.join(' '))) {
     score += 6
   }
 
-  if (/(app|hybrid|cashback|coin|reward|rewards)/i.test(query) && /app|hybrid_learning|cashback|student_rewards/.test(snippet.topics.join(' '))) {
+  if (/(app|apps|hybrid|cashback|coin|reward|rewards|student app|parent app|o'quvchi|ota-ona|leaderboard|grades|homework|timetable)/i.test(query) && /app|apps|hybrid_learning|cashback|student_rewards|parent_app|student_app/.test(snippet.topics.join(' '))) {
     score += 6
   }
 
@@ -685,11 +685,11 @@ function scoreVoiceSetItem(query: string, item: VoiceSetItem) {
     score += 8
   }
 
-  if (/(app|hybrid|cashback|coin|reward|rewards)/i.test(query) && /app|hybrid_learning|student_experience|ielts/.test(item.topics.join(' '))) {
+  if (/(app|apps|hybrid|cashback|coin|reward|rewards|student app|parent app|o'quvchi|ota-ona|leaderboard|grades|homework|timetable)/i.test(query) && /app|apps|hybrid_learning|student_experience|ielts|parent_app|student_app/.test(item.topics.join(' '))) {
     score += 7
   }
 
-  if (/(demo|support|contact|contacts|onboarding|sales|b2b|crm)/i.test(query) && /modme|b2b|demo|support|crm|sales/.test(item.topics.join(' '))) {
+  if (/(demo|support|contact|contacts|onboarding|sales|b2b|crm|legal|entrepreneur|consumer)/i.test(query) && /modme|b2b|demo|support|crm|sales/.test(item.topics.join(' '))) {
     score += 7
   }
 

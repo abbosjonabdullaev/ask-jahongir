@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { updateReview } from '@/lib/reviewStore'
 
+export const dynamic = 'force-dynamic'
+
 type Params = {
   params: Promise<{ id: string }>
 }

@@ -50,7 +50,7 @@ Main knowledge files live in [`data/`](./data).
 The app is configured to favor cheaper grounded answers by default:
 
 - if `GEMINI_API_KEY` exists, chat auto-prefers `gemini-2.5-flash-lite`
-- otherwise chat falls back to `gpt-4.1-mini`
+- otherwise chat falls back to `gpt-4o-mini`
 - `JAHONGIR_TRANSCRIBE_MODEL=gpt-4o-mini-transcribe`
 - reduced prompt size and fewer retrieved context blocks
 - capped answer length with `JAHONGIR_REPLY_MAX_TOKENS=420`

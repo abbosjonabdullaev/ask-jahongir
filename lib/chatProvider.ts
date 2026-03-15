@@ -35,7 +35,7 @@ export function resolveChatModel(provider: ChatProvider): string {
   return (
     process.env.JAHONGIR_OPENAI_CHAT_MODEL ??
     process.env.JAHONGIR_CHAT_MODEL ??
-    'gpt-4.1-mini'
+    'gpt-4o-mini'
   )
 }
 

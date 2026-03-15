@@ -1,6 +1,38 @@
 # Ask Jahongir
 
-A Next.js 14 app for chatting with a public-data-grounded Jahongir Pulatov AI clone. The app supports text chat, voice input, ElevenLabs voice playback, source links, and internal answer review tooling.
+[![Live Demo](https://img.shields.io/badge/live-askjahongirpulatov.netlify.app-0a7f5a?style=for-the-badge)](https://askjahongirpulatov.netlify.app)
+[![Next.js](https://img.shields.io/badge/Next.js-14-111111?style=for-the-badge&logo=nextdotjs)](https://nextjs.org/)
+[![OpenAI](https://img.shields.io/badge/OpenAI-grounded%20chat-412991?style=for-the-badge&logo=openai)](https://platform.openai.com/)
+[![ElevenLabs](https://img.shields.io/badge/ElevenLabs-custom%20voice-1a1a1a?style=for-the-badge)](https://elevenlabs.io/)
+
+Jahongir Pulatov AI clone built with Next.js, grounded in public-source data from official business pages, Telegram posts, public interviews, and curated transcript snippets.
+
+## Live
+
+- Demo: <https://askjahongirpulatov.netlify.app>
+- GitHub: <https://github.com/AkbarDevop/ask-jahongir>
+
+## What It Does
+
+- answers in a first-person Jahongir-style voice
+- supports text chat and voice input
+- can speak responses with a custom ElevenLabs voice
+- retrieves business context for `Jahon School`, `Cambridge Learning Center`, `Modme`, and related topics
+- shows source links for grounded answers
+- includes internal admin pages for answer review and voice management
+
+## Knowledge Base
+
+The app uses layered retrieval rather than a single prompt dump.
+
+- entity and business facts from official sites
+- Telegram-derived topic and statement data
+- curated public snippets from interviews and articles
+- longform interview summaries
+- local and YouTube-derived transcript snippets
+- a higher-priority voice set for style anchoring
+
+Main knowledge files live in [`data/`](./data).
 
 ## Stack
 
@@ -9,22 +41,27 @@ A Next.js 14 app for chatting with a public-data-grounded Jahongir Pulatov AI cl
 - TypeScript
 - OpenAI for chat and transcription
 - ElevenLabs for custom voice playback
+- Netlify for deployment
 
 ## Local Setup
 
-1. Install dependencies:
+1. Install dependencies
+
 ```bash
 npm install
 ```
 
-2. Add environment variables in `.env.local`:
+2. Create `.env.local`
+
 ```env
 OPENAI_API_KEY=...
 ELEVENLABS_API_KEY=...
 ELEVENLABS_VOICE_ID=...
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-3. Run the app:
+3. Run the app
+
 ```bash
 npm run dev
 ```
@@ -33,44 +70,37 @@ npm run dev
 
 ## Useful Scripts
 
-- `npm run dev`
-- `npm run dev:detached`
-- `npm run dev:stop`
-- `npm run build`
-- `npm run netlify:status`
-- `npm run deploy:netlify:preview`
-- `npm run deploy:netlify`
-- `npm run repo:publish`
-- `npm run site:deploy`
-
-## GitHub Setup
-
-This project currently sits inside an unrelated outer git repo on this machine, so use a standalone git repo inside this folder:
-
 ```bash
-gh auth login
-powershell -ExecutionPolicy Bypass -File scripts/publish-github.ps1 -RepoName ask-jahongir -Visibility private -GitUserName "Your Name" -GitUserEmail "you@example.com"
+npm run dev
+npm run dev:detached
+npm run dev:stop
+npm run build
+npm run netlify:status
+npm run deploy:netlify:preview
+npm run deploy:netlify
 ```
 
-The publish script refuses to use placeholder git identity values such as `you@example.com`, which is important on shared or borrowed laptops.
+## Deployment
 
-## Netlify Setup
+### GitHub
 
-The project includes [`netlify.toml`](./netlify.toml) and the Netlify Next.js runtime plugin.
+The repo can be published safely from a shared laptop with the helper script below:
 
-1. Log in to Netlify:
+```bash
+powershell -ExecutionPolicy Bypass -File scripts/publish-github.ps1 -RepoName ask-jahongir -Visibility public -GitUserName "Your Name" -GitUserEmail "you@example.com"
+```
+
+### Netlify
+
+This project includes [`netlify.toml`](./netlify.toml) and the Netlify Next.js runtime plugin.
+
 ```bash
 npm run netlify:login
+powershell -ExecutionPolicy Bypass -File scripts/deploy-netlify.ps1 -SiteName askjahongirpulatov -Production
 ```
 
-2. Create a preview deploy:
-```bash
-npm run deploy:netlify:preview
-```
+## Notes
 
-3. Create a production deploy:
-```bash
-powershell -ExecutionPolicy Bypass -File scripts/deploy-netlify.ps1 -SiteName ask-jahongir-demo -Production
-```
-
-Add the required environment variables in the Netlify dashboard before production use.
+- The app is grounded in public data, not private information.
+- Voice cloning should only be done with approved audio.
+- If `OPENAI_API_KEY` is missing or invalid, the app can still answer through its local grounded fallback path, but responses will be less natural than live model output.

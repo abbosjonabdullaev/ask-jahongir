@@ -8,6 +8,7 @@ import youtubeCuratedInsightsData from '@/data/jahongir-youtube-curated-insights
 import youtubeTranscriptSnippetsData from '@/data/jahongir-youtube-transcript-snippets.json'
 import youtubeSnippetsData from '@/data/jahongir-youtube-snippets.json'
 import telegramKnowledge from '@/data/jahongir-telegram-knowledge.json'
+import { getReviewSourceAdjustment, isHardFilteredByReview } from '@/lib/reviewInsights'
 
 type KnowledgeEntity = {
   name: string
@@ -236,29 +237,31 @@ function uniqueSources(sources: SourceLink[]) {
 }
 
 function sourcePriority(source: SourceLink) {
+  const reviewAdjustment = getReviewSourceAdjustment(source)
+
   switch (source.kind) {
     case 'entity':
-      return 100
+      return 100 + reviewAdjustment
     case 'voice_set':
-      return 95
+      return 95 + reviewAdjustment
     case 'voice_bank':
-      return 85
+      return 85 + reviewAdjustment
     case 'youtube_curated':
-      return 80
+      return 80 + reviewAdjustment
     case 'public_snippet':
-      return 70
+      return 70 + reviewAdjustment
     case 'longform':
-      return 60
+      return 60 + reviewAdjustment
     case 'youtube_transcript':
-      return 50
+      return 50 + reviewAdjustment
     case 'local_transcript':
-      return 45
+      return 45 + reviewAdjustment
     case 'telegram_post':
-      return 40
+      return 40 + reviewAdjustment
     case 'youtube':
-      return 20
+      return 20 + reviewAdjustment
     default:
-      return 0
+      return reviewAdjustment
   }
 }
 
@@ -269,6 +272,10 @@ function prioritizeSources(sources: SourceLink[]) {
 }
 
 function isWeakCrossTopicSource(source: SourceLink, matchedEntities: string[], responseMode: ResponseMode) {
+  if (isHardFilteredByReview(source)) {
+    return true
+  }
+
   if (responseMode === 'ecosystem') {
     if (
       source.kind === 'voice_set' &&

@@ -9,6 +9,7 @@ import {
   resolveChatModel,
   resolveChatProvider,
 } from '@/lib/chatProvider'
+import { getReviewWarningsForMode } from '@/lib/reviewInsights'
 
 type Message = {
   role: 'user' | 'assistant'
@@ -108,6 +109,14 @@ function buildResponseContract(
         ? `Tanlangan ohang signallari: ${retrieval.styleSignals.join('; ')}.`
         : `Selected tone cues: ${retrieval.styleSignals.join('; ')}.`
       : null
+  const reviewWarningLines = getReviewWarningsForMode(retrieval.responseMode).map((warning) =>
+    locale === 'uz'
+      ? `Review signal: ${warning
+          .replace('Avoid generic filler and generic mission statements for this mode.', "Bu rejimda umumiy filler va balandparvoz mission gaplaridan qoching.")
+          .replace('Keep this mode tighter and avoid bloated multi-paragraph answers.', "Bu rejimda javobni ixchamroq tuting va keraksiz cho'zilgan abzaslardan qoching.")
+          .replace('Prefer concrete, direct wording over abstract framing for this mode.', "Bu rejimda abstrakt framing o'rniga aniq va to'g'ridan-to'g'ri iboralarni ishlating.")}`
+      : `Review signal: ${warning}`
+  )
 
   const baseRules =
     locale === 'uz'
@@ -179,7 +188,9 @@ function buildResponseContract(
               ? 'For business questions: answer in the order of problem, principle, and practical solution.'
               : 'For advice questions: state the principle first, then give one practical next step.'
 
-  return [modeLine, ...baseRules, modeRule, formatRule, timeRule, styleLine].filter(Boolean).join('\n')
+  return [modeLine, ...baseRules, modeRule, formatRule, timeRule, styleLine, ...reviewWarningLines]
+    .filter(Boolean)
+    .join('\n')
 }
 
 function buildFallbackReply(

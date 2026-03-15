@@ -17,6 +17,51 @@ type Message = {
 
 const replyMaxTokens = Number(process.env.JAHONGIR_REPLY_MAX_TOKENS ?? '420')
 
+function normalizeFirstPersonReply(reply: string, locale: 'en' | 'uz') {
+  let normalized = reply.trim()
+
+  if (locale === 'en') {
+    normalized = normalized
+      .replace(/\bIn your Telegram posts\b/gi, 'In my Telegram posts')
+      .replace(/\bYour Telegram posts\b/gi, 'My Telegram posts')
+      .replace(/\bYour posts\b/gi, 'My posts')
+      .replace(/\bYour content\b/gi, 'My content')
+      .replace(/\bYour approach\b/gi, 'My approach')
+      .replace(/\bYour view\b/gi, 'My view')
+      .replace(/\bYour work\b/gi, 'My work')
+      .replace(/\bYour businesses\b/gi, 'My businesses')
+      .replace(/\bOverall, your\b/gi, 'Overall, my')
+      .replace(/\bYou focus on\b/gi, 'I focus on')
+      .replace(/\bYou emphasize\b/gi, 'I emphasize')
+      .replace(/\bYou share\b/gi, 'I share')
+      .replace(/\bYou talk about\b/gi, 'I talk about')
+      .replace(/\bYou publicly\b/gi, 'I publicly')
+      .replace(/\bYou built\b/gi, 'I built')
+      .replace(/\bYou usually\b/gi, 'I usually')
+      .replace(/\bYou tend to\b/gi, 'I tend to')
+      .replace(/\bJahongir focuses on\b/gi, 'I focus on')
+      .replace(/\bJahongir emphasizes\b/gi, 'I emphasize')
+      .replace(/\bJahongir talks about\b/gi, 'I talk about')
+      .replace(/\bHis approach\b/gi, 'My approach')
+  } else {
+    normalized = normalized
+      .replace(/\bSizning Telegram postlaringizda\b/gi, 'Telegram postlarimda')
+      .replace(/\bSizning Telegram postlaringiz\b/gi, 'Telegram postlarim')
+      .replace(/\bSizning postlaringiz\b/gi, 'Postlarim')
+      .replace(/\bSizning kontentingiz\b/gi, 'Kontentim')
+      .replace(/\bSizning yondashuvingiz\b/gi, 'Yondashuvim')
+      .replace(/\bSiz ko'proq\b/gi, "Men ko'proq")
+      .replace(/\bSiz urg'u berasiz\b/gi, "Men urg'u beraman")
+      .replace(/\bSiz ta'kidlaysiz\b/gi, "Men ta'kidlayman")
+      .replace(/\bSiz ulashasiz\b/gi, 'Men ulashaman')
+      .replace(/\bJahongir ko'proq\b/gi, "Men ko'proq")
+      .replace(/\bJahongir urg'u beradi\b/gi, "Men urg'u beraman")
+      .replace(/\bJahongir ta'kidlaydi\b/gi, "Men ta'kidlayman")
+  }
+
+  return normalized
+}
+
 function buildResponseContract(
   locale: 'en' | 'uz',
   retrieval: ReturnType<typeof buildKnowledgeContext>
@@ -37,6 +82,7 @@ function buildResponseContract(
     locale === 'uz'
       ? [
           "Javobni odatda 1-3 qisqa abzasda bering.",
+          'Har doim birinchi shaxsda yozing: men, mening, biz.',
           "Avval to'g'ridan-to'g'ri javob bering, keyin kerak bo'lsa qisqa asos qo'shing.",
           "Agar savol follow-up bo'lsa, oldingi kontekstni davom ettiring va mavzuni o'zgartirib yubormang.",
           "Foydalanuvchi ro'yxat so'ramasa, ro'yxat ishlatmang.",
@@ -44,8 +90,10 @@ function buildResponseContract(
           "Customer support uslubida yozmang. 'Agar xohlasangiz yana aytaman' kabi sun'iy yakunlardan qoching.",
           "Foydalanuvchi so'ramasa, saytga kirishni yoki qo'shimcha ma'lumot olishni tavsiya qilmang.",
           "Agar fikr yoki yondashuv public manbada aniq ko'rinib turgan bo'lsa, 'mening fikrimcha' deb yumshatmang, bevosita ayting.",
+          "Hech qachon 'Sizning Telegram postlaringiz' yoki 'Jahongir ...' deb tashqaridan gapirmang. 'Telegram postlarimda men ...' deb yozing.",
         ]
       : [
+          'Always write in first person: I, my, me.',
           'Usually answer in 1-3 short paragraphs.',
           'Lead with the direct answer, then add brief grounding if useful.',
           'If the question is a follow-up, continue the prior context instead of resetting the topic.',
@@ -54,6 +102,7 @@ function buildResponseContract(
           "Do not sound like customer support. Avoid generic closers such as 'let me know if you want more details'.",
           "Do not tell the user to visit a website unless they explicitly asked for logistics or source links.",
           "If the viewpoint is clearly grounded in the selected public sources, say it directly instead of softening it with 'in my opinion'.",
+          "Never write from the outside with phrasing like 'your Telegram posts' or 'Jahongir focuses on'. Say 'in my Telegram posts' or 'I focus on' instead.",
         ]
 
   const modeRule = hasEntity
@@ -198,12 +247,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const normalizedReply = normalizeFirstPersonReply(reply, locale)
+
     const question = messages.filter((message) => message.role === 'user').at(-1)?.content ?? ''
 
     await appendReview({
       locale,
       question,
-      reply,
+      reply: normalizedReply,
       matchedEntities: retrieval.matchedEntities,
       sources: retrieval.sources,
       responseMode: retrieval.responseMode,
@@ -211,7 +262,7 @@ export async function POST(request: NextRequest) {
     })
 
     return NextResponse.json({
-      reply,
+      reply: normalizedReply,
       matchedEntities: retrieval.matchedEntities,
       sources: retrieval.sources,
       provider: chatProvider,

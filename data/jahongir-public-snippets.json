@@ -379,6 +379,42 @@
       "style_signal": "clear, source-ranked, evidence-first",
       "source_title": "Jahon School official education ecosystem summary",
       "source_url": "https://jahonschool.uz/aboutus"
+    },
+    {
+      "id": "cambridge-app-hybrid-model",
+      "type": "official_message",
+      "topics": ["cambridge", "app", "hybrid_learning", "student_experience"],
+      "summary": "The official Cambridge Students' app page presents the app as part of a hybrid-learning model with a student personal cabinet, reinforcing that Cambridge publicly positions itself as more than an offline IELTS center.",
+      "style_signal": "productized, student-facing, modern",
+      "source_title": "Cambridge Students' app page",
+      "source_url": "https://cambridgeonline.uz/cambridge-app/"
+    },
+    {
+      "id": "cambridge-cashback-and-rewards",
+      "type": "official_message",
+      "topics": ["cambridge", "cashback", "ielts", "student_rewards"],
+      "summary": "Cambridge's official success and offer pages describe an IELTS cashback rule for IELTS Level 2 and IELTS Rocket students who score 7.5+ overall, and also define a Cambridge points and Cambridge coin reward system in the app.",
+      "style_signal": "results-driven, concrete, incentive-oriented",
+      "source_title": "Cambridge official success and offer pages",
+      "source_url": "https://cambridgeonline.uz/success/"
+    },
+    {
+      "id": "modme-demo-support-signal",
+      "type": "official_message",
+      "topics": ["modme", "demo", "support", "operations"],
+      "summary": "Modme's official site and support page frame the product as a B2B software purchase with a demo period, video lessons, documentation, Telegram support, and direct manager contacts rather than a self-serve consumer app.",
+      "style_signal": "b2b, operator-first, clear",
+      "source_title": "Modme official support and contacts pages",
+      "source_url": "https://modme.uz/support/"
+    },
+    {
+      "id": "modme-vacancy-b2b-sales",
+      "type": "official_message",
+      "topics": ["modme", "sales", "b2b", "education_business"],
+      "summary": "Modme's official vacancies page describes sales roles around presenting the CRM to education centers, qualifying leads, and closing deals, which is a clean public signal of the product's education-B2B operating model.",
+      "style_signal": "sales-driven, commercial, operator-first",
+      "source_title": "Modme official vacancies page",
+      "source_url": "https://modme.uz/vacancies/"
     }
   ]
 }

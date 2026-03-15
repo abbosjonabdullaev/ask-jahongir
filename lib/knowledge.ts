@@ -398,14 +398,14 @@ function entityKeywordBoost(entity: KnowledgeEntity, query: string) {
 
   if (
     entity.name === 'Modme' &&
-    /(crm|lms|software|platform|automation|edtech|edu ?tech|lead|report|payment|finance)/i.test(query)
+    /(crm|lms|software|platform|automation|edtech|edu ?tech|lead|report|payment|finance|demo|support|pricing|price|gamification|vacancy|sales|b2b)/i.test(query)
   ) {
     return 4
   }
 
   if (
     entity.name === 'Cambridge Learning Center' &&
-    /(ielts|english|branch|branches|certificate|cambridge|teacher|student|learning center)/i.test(query)
+    /(ielts|english|branch|branches|certificate|cambridge|teacher|student|learning center|app|hybrid|cashback|coin|reward|movie day|speaking club)/i.test(query)
   ) {
     return 4
   }
@@ -543,6 +543,14 @@ function scoreSnippet(query: string, snippet: PublicSnippet) {
     score += 6
   }
 
+  if (/(demo|support|contact|contacts|telegram support|video lesson|documentation|onboarding)/i.test(query) && /demo|support|operations/.test(snippet.topics.join(' '))) {
+    score += 6
+  }
+
+  if (/(app|hybrid|cashback|coin|reward|rewards)/i.test(query) && /app|hybrid_learning|cashback|student_rewards/.test(snippet.topics.join(' '))) {
+    score += 6
+  }
+
   if (/(partner|partners|ecosystem|what makes.*different|nima bilan farq qiladi|qanday ajraladi|hamkor|hamkorlar|qadriyat|values)/i.test(query) && /partners|ecosystem|values/.test(snippet.topics.join(' '))) {
     score += 5
   }
@@ -675,6 +683,14 @@ function scoreVoiceSetItem(query: string, item: VoiceSetItem) {
 
   if (/(what businesses|what projects|your businesses|your projects|business ecosystem|project ecosystem|qanday loyihalar|qaysi loyihalar|qanday bizneslar|qaysi bizneslar|nima bizneslaringiz bor|ekotizim)/i.test(query) && /businesses|projects|ecosystem/.test(item.topics.join(' '))) {
     score += 8
+  }
+
+  if (/(app|hybrid|cashback|coin|reward|rewards)/i.test(query) && /app|hybrid_learning|student_experience|ielts/.test(item.topics.join(' '))) {
+    score += 7
+  }
+
+  if (/(demo|support|contact|contacts|onboarding|sales|b2b|crm)/i.test(query) && /modme|b2b|demo|support|crm|sales/.test(item.topics.join(' '))) {
+    score += 7
   }
 
   if (/(jahon school|jahon|maktab|school|parent|ota-ona|skilldev)/i.test(query) && /jahon_school|parents|life_skills/.test(item.topics.join(' '))) {

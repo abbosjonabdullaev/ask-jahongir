@@ -41,6 +41,9 @@ export const UI_TEXT = {
     interviewSource: 'Interview',
     publicSource: 'Public source',
     inputHint: 'Press Enter to send. Shift+Enter for a new line.',
+    micPermissionDenied: 'Microphone access is blocked. Allow microphone permission for this site and refresh the page.',
+    micPermissionTelegram: 'Microphone access is blocked in this browser. If you opened the site inside Telegram, open it in Chrome or Safari and allow microphone access.',
+    audioPlaybackBlocked: 'Browser audio playback was blocked. Tap Listen on the answer to play it manually.',
   },
   uz: {
     title: "Jahongirdan so'rang",
@@ -82,6 +85,9 @@ export const UI_TEXT = {
     interviewSource: 'Intervyu',
     publicSource: 'Ochiq manba',
     inputHint: "Yuborish uchun Enter bosing. Yangi qator uchun Shift+Enter.",
+    micPermissionDenied: 'Mikrofon ruxsati bloklangan. Sayt uchun mikrofon ruxsatini yoqing va sahifani yangilang.',
+    micPermissionTelegram: 'Mikrofon bu brauzerda bloklangan. Agar saytni Telegram ichidan ochgan bo‘lsangiz, uni Chrome yoki Safari orqali ochib, mikrofon ruxsatini bering.',
+    audioPlaybackBlocked: 'Brauzer audio ijroni blokladi. Javob ostidagi Tinglash tugmasini bosib, ovozni qo‘lda ishga tushiring.',
   },
 } as const
 

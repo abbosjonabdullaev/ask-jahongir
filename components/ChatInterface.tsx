@@ -32,6 +32,26 @@ const answerCacheStorageKey = 'ask-jahongir-answer-cache-v1'
 const feedbackStorageKey = 'ask-jahongir-feedback-v1'
 const cacheTtlMs = 1000 * 60 * 60 * 12
 
+function isTelegramInAppBrowser() {
+  if (typeof navigator === 'undefined') return false
+  return /Telegram/i.test(navigator.userAgent)
+}
+
+async function getMicrophonePermissionState() {
+  if (typeof navigator === 'undefined' || !navigator.permissions?.query) {
+    return null
+  }
+
+  try {
+    const status = await navigator.permissions.query({
+      name: 'microphone' as PermissionName,
+    })
+    return status.state
+  } catch {
+    return null
+  }
+}
+
 function getPreferredRecordingMimeType() {
   if (typeof MediaRecorder === 'undefined') return ''
 
@@ -260,6 +280,134 @@ export function ChatInterface() {
   const shouldSpeakReplyRef = useRef(false)
   const t = UI_TEXT[lang]
 
+  const stopAllSpeech = useCallback(() => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+    }
+
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel()
+    }
+
+    setIsSpeaking(false)
+    setIsSpeechPaused(false)
+    setStatusText(null)
+  }, [])
+
+  const getMicrophoneErrorMessage = useCallback(
+    (error: unknown) => {
+      const name = error instanceof DOMException ? error.name : ''
+
+      if (name === 'NotAllowedError' || name === 'PermissionDeniedError') {
+        return isTelegramInAppBrowser() ? t.micPermissionTelegram : t.micPermissionDenied
+      }
+
+      if (name === 'NotFoundError' || name === 'DevicesNotFoundError') {
+        return lang === 'uz'
+          ? 'Mikrofon topilmadi. Qurilmada mikrofon ulanganini tekshiring.'
+          : 'No microphone was found. Check that a microphone is connected to this device.'
+      }
+
+      return error instanceof Error ? error.message : 'Could not access microphone.'
+    },
+    [lang, t.micPermissionDenied, t.micPermissionTelegram]
+  )
+
+  const speakWithBrowserFallback = useCallback(
+    (text: string) => {
+      if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+        throw new Error(t.audioPlaybackBlocked)
+      }
+
+      const utterance = new SpeechSynthesisUtterance(text)
+      utterance.lang = lang === 'uz' ? 'uz-UZ' : 'en-US'
+      utterance.onstart = () => {
+        setIsSpeaking(true)
+        setIsSpeechPaused(false)
+        setStatusText(t.speaking)
+      }
+      utterance.onend = () => {
+        setIsSpeaking(false)
+        setIsSpeechPaused(false)
+        setStatusText(null)
+      }
+      utterance.onerror = () => {
+        setIsSpeaking(false)
+        setIsSpeechPaused(false)
+        setStatusText(null)
+        setError(t.audioPlaybackBlocked)
+      }
+
+      window.speechSynthesis.cancel()
+      window.speechSynthesis.speak(utterance)
+    },
+    [lang, t.audioPlaybackBlocked, t.speaking]
+  )
+
+  const playSpokenReply = useCallback(
+    async (text: string) => {
+      stopAllSpeech()
+      setIsSpeaking(true)
+      setIsSpeechPaused(false)
+      setStatusText(t.speaking)
+
+      try {
+        const response = await fetch('/api/speak', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text, locale: lang }),
+        })
+
+        if (!response.ok) {
+          const data = await response.json().catch(() => ({}))
+          throw new Error(data.error || 'Speech request failed')
+        }
+
+        const blob = await response.blob()
+        const url = URL.createObjectURL(blob)
+        const audio = new Audio(url)
+        audioRef.current = audio
+        audio.onended = () => {
+          setIsSpeaking(false)
+          setIsSpeechPaused(false)
+          setStatusText(null)
+          URL.revokeObjectURL(url)
+        }
+        audio.onpause = () => {
+          if (!audio.ended) {
+            setIsSpeechPaused(true)
+            setStatusText(null)
+          }
+        }
+        audio.onplay = () => {
+          setIsSpeaking(true)
+          setIsSpeechPaused(false)
+          setStatusText(t.speaking)
+        }
+        audio.onerror = () => {
+          setIsSpeaking(false)
+          setIsSpeechPaused(false)
+          setStatusText(null)
+          setError(t.audioPlaybackBlocked)
+          URL.revokeObjectURL(url)
+        }
+
+        await audio.play()
+      } catch (error) {
+        try {
+          speakWithBrowserFallback(text)
+        } catch {
+          setIsSpeaking(false)
+          setIsSpeechPaused(false)
+          setStatusText(null)
+          setError(error instanceof Error ? error.message : t.audioPlaybackBlocked)
+        }
+      }
+    },
+    [lang, speakWithBrowserFallback, stopAllSpeech, t.audioPlaybackBlocked, t.speaking]
+  )
+
   useEffect(() => {
     const savedTheme = localStorage.getItem('ask-jahongir-theme')
     const detected =
@@ -358,85 +506,22 @@ export function ChatInterface() {
 
     lastSpokenAssistantRef.current = lastMessage.content
 
-    let revokedUrl: string | null = null
-
     const speak = async () => {
-      try {
-        setIsSpeaking(true)
-        setIsSpeechPaused(false)
-        setStatusText(t.speaking)
-        const response = await fetch('/api/speak', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            text: lastMessage.content,
-            locale: lang,
-          }),
-        })
-
-        if (!response.ok) {
-          const data = await response.json().catch(() => ({}))
-          throw new Error(data.error || 'Speech request failed')
-        }
-
-        const blob = await response.blob()
-        const url = URL.createObjectURL(blob)
-        revokedUrl = url
-        const audio = new Audio(url)
-        audioRef.current = audio
-        audio.onended = () => {
-          setIsSpeaking(false)
-          setIsSpeechPaused(false)
-          setStatusText(null)
-        }
-        audio.onpause = () => {
-          if (!audio.ended) {
-            setIsSpeechPaused(true)
-            setStatusText(null)
-          }
-        }
-        audio.onplay = () => {
-          setIsSpeaking(true)
-          setIsSpeechPaused(false)
-          setStatusText(t.speaking)
-        }
-        audio.onerror = () => {
-          setIsSpeaking(false)
-          setIsSpeechPaused(false)
-          setStatusText(null)
-        }
-        await audio.play()
-      } catch (speechError) {
-        setIsSpeaking(false)
-        setIsSpeechPaused(false)
-        setStatusText(null)
-        setError(speechError instanceof Error ? speechError.message : 'Failed to play speech.')
-      }
+      await playSpokenReply(lastMessage.content)
     }
 
     void speak()
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause()
-      }
-      setStatusText(null)
-      if (revokedUrl) {
-        URL.revokeObjectURL(revokedUrl)
-      }
+      stopAllSpeech()
     }
-  }, [audioEnabled, lang, messages])
+  }, [audioEnabled, messages, playSpokenReply, stopAllSpeech])
 
   async function submitMessage(text: string, responseMode: ResponseMode = 'text') {
     const question = text.trim()
     if (!question || isLoading) return
 
-    if (audioRef.current) {
-      audioRef.current.pause()
-    }
-    setIsSpeaking(false)
-    setIsSpeechPaused(false)
-    setStatusText(null)
+    stopAllSpeech()
     shouldSpeakReplyRef.current = audioEnabled && responseMode === 'voice'
 
     const nextMessages = [...messages, { role: 'user' as const, content: question }]
@@ -552,12 +637,27 @@ export function ChatInterface() {
       return
     }
 
+    if (typeof window !== 'undefined' && !window.isSecureContext) {
+      setError(
+        lang === 'uz'
+          ? 'Ovozli yozuv faqat xavfsiz HTTPS saytida ishlaydi.'
+          : 'Voice recording only works on a secure HTTPS site.'
+      )
+      return
+    }
+
     if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
       setError('Voice recording is not supported in this browser.')
       return
     }
 
     try {
+      const permissionState = await getMicrophonePermissionState()
+      if (permissionState === 'denied') {
+        setError(isTelegramInAppBrowser() ? t.micPermissionTelegram : t.micPermissionDenied)
+        return
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
       streamRef.current = stream
       const mimeType = getPreferredRecordingMimeType()
@@ -583,7 +683,7 @@ export function ChatInterface() {
       setStatusText(t.listening)
       setError(null)
     } catch (recordError) {
-      setError(recordError instanceof Error ? recordError.message : 'Could not access microphone.')
+      setError(getMicrophoneErrorMessage(recordError))
     }
   }
 
@@ -604,18 +704,21 @@ export function ChatInterface() {
     setInput('')
     setError(null)
     setIsLoading(false)
-    setIsSpeaking(false)
-    setIsSpeechPaused(false)
-    setStatusText(null)
     shouldSpeakReplyRef.current = false
-    if (audioRef.current) {
-      audioRef.current.pause()
-    }
+    stopAllSpeech()
   }
 
   function handleSpeechPlaybackToggle() {
     const audio = audioRef.current
-    if (!audio) return
+    if (!audio) {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel()
+        setIsSpeaking(false)
+        setIsSpeechPaused(false)
+        setStatusText(null)
+      }
+      return
+    }
 
     if (isSpeechPaused) {
       void audio.play()
@@ -633,44 +736,7 @@ export function ChatInterface() {
     }
     lastSpokenAssistantRef.current = ''
     shouldSpeakReplyRef.current = false
-    if (audioRef.current) {
-      audioRef.current.pause()
-    }
-    try {
-      setIsSpeaking(true)
-      setStatusText(t.speaking)
-      const response = await fetch('/api/speak', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, locale: lang }),
-      })
-      const blob = await response.blob()
-      const url = URL.createObjectURL(blob)
-      const audio = new Audio(url)
-      audioRef.current = audio
-      audio.onended = () => {
-        setIsSpeaking(false)
-        setIsSpeechPaused(false)
-        setStatusText(null)
-        URL.revokeObjectURL(url)
-      }
-      audio.onpause = () => {
-        if (!audio.ended) {
-          setIsSpeechPaused(true)
-          setStatusText(null)
-        }
-      }
-      audio.onplay = () => {
-        setIsSpeaking(true)
-        setIsSpeechPaused(false)
-        setStatusText(t.speaking)
-      }
-      await audio.play()
-    } catch (speakError) {
-      setIsSpeaking(false)
-      setStatusText(null)
-      setError(speakError instanceof Error ? speakError.message : 'Failed to play speech.')
-    }
+    await playSpokenReply(text)
   }
 
   function handleFollowUp(question: string) {

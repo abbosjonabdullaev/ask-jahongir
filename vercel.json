@@ -1,6 +1,17 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "framework": "nextjs",
-  "installCommand": "npm install"
-} 
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "app/api/chat/route.ts": {
+      "maxDuration": 60
+    },
+    "app/api/transcribe/route.ts": {
+      "maxDuration": 60
+    },
+    "app/api/speak/route.ts": {
+      "maxDuration": 60
+    },
+    "app/api/voice/clone/route.ts": {
+      "maxDuration": 60
+    }
+  }
+}

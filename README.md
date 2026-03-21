@@ -60,7 +60,7 @@ Main knowledge files live in [`data/`](./data).
 - Gemini or OpenAI for chat generation
 - OpenAI for transcription and fallback
 - ElevenLabs for custom voice playback
-- Netlify for deployment
+- Vercel or Netlify for deployment
 
 ## Cost Defaults
 
@@ -106,6 +106,9 @@ npm run dev
 npm run dev:detached
 npm run dev:stop
 npm run build
+npm run vercel:login
+npm run vercel:link
+npm run deploy:vercel
 npm run netlify:status
 npm run deploy:netlify:preview
 npm run deploy:netlify
@@ -120,6 +123,32 @@ The repo can be published safely from a shared laptop with the helper script bel
 ```bash
 powershell -ExecutionPolicy Bypass -File scripts/publish-github.ps1 -RepoName ask-jahongir -Visibility public -GitUserName "Your Name" -GitUserEmail "you@example.com"
 ```
+
+### Vercel
+
+This project includes [`vercel.json`](./vercel.json) with higher function durations for the AI and voice routes.
+
+```bash
+npm run vercel:login
+npm run vercel:link
+npm run deploy:vercel
+```
+
+Before the first production deploy, add the same env vars from `.env.local` to the Vercel project:
+
+- `JAHONGIR_CHAT_PROVIDER`
+- `OPENAI_API_KEY`
+- `GEMINI_API_KEY`
+- `JAHONGIR_TRANSCRIBE_MODEL`
+- `JAHONGIR_REPLY_MAX_TOKENS`
+- `ELEVENLABS_API_KEY`
+- `ELEVENLABS_VOICE_ID`
+- `ELEVENLABS_MODEL_ID`
+- `ELEVENLABS_STABILITY`
+- `ELEVENLABS_SIMILARITY_BOOST`
+- `ELEVENLABS_STYLE`
+- `ELEVENLABS_SPEAKER_BOOST`
+- `NEXT_PUBLIC_APP_URL`
 
 ### Netlify
 

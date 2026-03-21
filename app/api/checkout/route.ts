@@ -1,12 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2023-10-16',
-})
+function getStripeClient() {
+  const secretKey = process.env.STRIPE_SECRET_KEY?.trim()
+
+  if (!secretKey) {
+    return null
+  }
+
+  return new Stripe(secretKey, {
+    apiVersion: '2023-10-16',
+  })
+}
 
 export async function POST(request: NextRequest) {
   try {
+    const stripe = getStripeClient()
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL?.trim()
+
+    if (!stripe || !appUrl) {
+      return NextResponse.json(
+        { error: 'Checkout is not configured in this environment.' },
+        { status: 503 }
+      )
+    }
+
     const { headshots } = await request.json()
     
     if (!headshots || !Array.isArray(headshots)) {
@@ -34,8 +52,8 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/cancel`,
+      success_url: `${appUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${appUrl}/cancel`,
       metadata: {
         headshots_count: headshots.length.toString(),
         headshots_urls: JSON.stringify(headshots),

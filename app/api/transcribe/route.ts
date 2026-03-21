@@ -1,16 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+function getOpenAIClient() {
+  const apiKey = process.env.OPENAI_API_KEY?.trim()
+
+  if (!apiKey) {
+    return null
+  }
+
+  return new OpenAI({ apiKey })
+}
 
 const transcribeModel =
   process.env.JAHONGIR_TRANSCRIBE_MODEL ?? 'gpt-4o-mini-transcribe'
 
 export async function POST(request: NextRequest) {
   try {
-    if (!process.env.OPENAI_API_KEY) {
+    const client = getOpenAIClient()
+
+    if (!client) {
       return NextResponse.json({ error: 'Missing OPENAI_API_KEY in environment.' }, { status: 500 })
     }
 

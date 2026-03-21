@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+function getOpenAIClient() {
+  const apiKey = process.env.OPENAI_API_KEY?.trim()
+
+  if (!apiKey) {
+    return null
+  }
+
+  return new OpenAI({ apiKey })
+}
 
 type SpeakRequest = {
   text?: string
@@ -67,7 +73,9 @@ async function speakWithOpenAI({
   text: string
   locale: 'en' | 'uz'
 }) {
-  if (!process.env.OPENAI_API_KEY) {
+  const client = getOpenAIClient()
+
+  if (!client) {
     throw new Error('Missing OPENAI_API_KEY in environment.')
   }
 
